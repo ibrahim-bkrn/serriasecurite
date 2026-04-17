@@ -14,10 +14,12 @@
         <div class="footer__col">
           <h4 class="footer__col-title">Navigation</h4>
           <ul class="footer__nav">
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">Nos services</a></li>
-            <li><a href="#">Secteurs d'intervention</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><router-link to="/">Accueil</router-link></li>
+            <li><router-link to="/solutions/surveillance-humaine">Surveillance humaine</router-link></li>
+            <li><router-link to="/solutions/surveillance-materielle">Surveillance matérielle</router-link></li>
+            <li><router-link to="/secteurs/chantiers">Chantiers BTP</router-link></li>
+            <li><router-link to="/secteurs/biens-vacants">Biens vacants</router-link></li>
+            <li><router-link to="/contact">Contact</router-link></li>
           </ul>
         </div>
 
@@ -25,8 +27,9 @@
           <h4 class="footer__col-title">Contact</h4>
           <div class="footer__contact">
             <p>Île-de-France</p>
-            <p class="footer__contact-highlight">Audit & devis gratuit</p>
-            <p>Réponse en 30 min</p>
+            <a href="tel:0782564979" class="footer__contact-phone">07 82 56 49 79</a>
+            <p class="footer__contact-highlight">Audit gratuit en 30 min</p>
+            <router-link to="/contact" class="footer__contact-cta">Demander un audit →</router-link>
           </div>
         </div>
       </div>
@@ -95,7 +98,8 @@ import logo from '../assets/logo/logo-horizontal.png'
   gap: 12px;
 }
 
-.footer__nav a {
+.footer__nav a,
+.footer__nav :deep(a) {
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 300;
@@ -104,7 +108,8 @@ import logo from '../assets/logo/logo-horizontal.png'
   transition: color var(--transition);
 }
 
-.footer__nav a:hover {
+.footer__nav a:hover,
+.footer__nav :deep(a):hover {
   color: var(--color-gold);
 }
 
@@ -121,10 +126,35 @@ import logo from '../assets/logo/logo-horizontal.png'
   color: var(--color-muted);
 }
 
+.footer__contact-phone {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-white);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.footer__contact-phone:hover { color: var(--color-gold); }
+
 .footer__contact-highlight {
   color: var(--color-text) !important;
   font-weight: 500 !important;
 }
+
+.footer__contact-cta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.footer__contact-cta:hover { opacity: 0.75; }
 
 .footer__bottom {
   border-top: 1px solid var(--color-border);

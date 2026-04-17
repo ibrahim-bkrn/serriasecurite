@@ -4,7 +4,7 @@
     <main>
       <HeroSection />
       <PartenairesSection />
-      <ServicesSection />
+      <SolutionsGateway />
       <StatsSection />
       <SecteursSection />
       <ClientsSection />
@@ -18,8 +18,8 @@
 <script setup>
 import NavBar from '../components/NavBar.vue'
 import HeroSection from '../components/HeroSection.vue'
+import SolutionsGateway from '../components/SolutionsGateway.vue'
 import PartenairesSection from '../components/PartenairesSection.vue'
-import ServicesSection from '../components/ServicesSection.vue'
 import StatsSection from '../components/StatsSection.vue'
 import SecteursSection from '../components/SecteursSection.vue'
 import ClientsSection from '../components/ClientsSection.vue'

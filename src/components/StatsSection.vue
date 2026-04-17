@@ -20,14 +20,14 @@
           <span class="featured__number">+80%</span>
           <div class="featured__line"></div>
           <span class="featured__label">CAMBRIOLAGES ÉVITÉS grâce à la vidéosurveillance</span>
-          <a href="#contact" class="bento__cta">
+          <router-link to="/contact" class="bento__cta">
             <span>Nous contacter</span>
             <div class="bento__cta-arrow">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-          </a>
+          </router-link>
         </div>
 
         <!-- 2x2 grid of other stats -->

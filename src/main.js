@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 
 import HomePage from './views/HomePage.vue'
+import SurveillanceHumainePage from './views/solutions/SurveillanceHumainePage.vue'
+import ContactPage from './views/ContactPage.vue'
 import FontsPreview from './views/FontsPreview.vue'
 import ButtonPreview from './views/ButtonPreview.vue'
 import DesignA from './views/designs/DesignA.vue'
@@ -14,7 +16,9 @@ import DesignE from './views/designs/DesignE.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/',         component: HomePage },
+    { path: '/',                                  component: HomePage },
+    { path: '/solutions/surveillance-humaine',    component: SurveillanceHumainePage },
+    { path: '/contact',                           component: ContactPage },
     { path: '/design/a', component: DesignA },
     { path: '/design/b', component: DesignB },
     { path: '/design/c', component: DesignC },

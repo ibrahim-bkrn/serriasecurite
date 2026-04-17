@@ -4,11 +4,11 @@
     <div class="hero__left">
       <div class="hero__brand">
         <span class="hero__brand-mark"><img src="/src/assets/logo/Logo 2 Verticale.png" alt="" width="80px"></span>
-        <span class="hero__brand-name">
+        <!--<span class="hero__brand-name">
           <span class="hero__brand-dot"></span>
           Systèmes de sécurité & gardiennage
           <span class="hero__brand-dot"></span>
-        </span>
+        </span>-->
       </div>
 
       <h1 class="hero__title">
@@ -24,14 +24,14 @@
         <span class="hero__meta-pill">24/7</span>
       </div>
 
-      <a href="#contact" class="hero__cta">
+      <router-link to="/contact" class="hero__cta">
         <span>SÉCURISER MON BIEN</span>
         <div class="hero__cta-arrow">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-      </a>
+      </router-link>
     </div>
 
     <!-- Right: 2x2 service grid -->
@@ -290,21 +290,20 @@ const services = [
   }
   .hero__left {
     width: 100%;
-    padding: 80px 32px 48px;
+    padding: 108px 24px 40px;
     border-right: none;
     border-bottom: 1px solid rgba(201, 162, 96, 0.1);
   }
   .hero__left::before { display: none; }
+  .hero__brand { display: none; }
+  .hero__title { font-size: clamp(40px, 10vw, 56px); margin-bottom: 24px; margin-top: 0; }
+  .hero__meta { margin-bottom: 32px; }
   .hero__grid {
-    height: 60vh;
+    display: flex;
+    flex-direction: column;
   }
-}
-
-@media (max-width: 500px) {
-  .hero__grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
-    height: 80vh;
+  .hero__cell {
+    height: 220px;
   }
 }
 </style>
