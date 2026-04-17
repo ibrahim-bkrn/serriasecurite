@@ -5,6 +5,7 @@ import App from './App.vue'
 import HomePage from './views/HomePage.vue'
 import SurveillanceHumainePage from './views/solutions/SurveillanceHumainePage.vue'
 import ContactPage from './views/ContactPage.vue'
+import NotFoundPage from './views/NotFoundPage.vue'
 import FontsPreview from './views/FontsPreview.vue'
 import ButtonPreview from './views/ButtonPreview.vue'
 import DesignA from './views/designs/DesignA.vue'
@@ -26,6 +27,7 @@ const router = createRouter({
     { path: '/design/e', component: DesignE },
     { path: '/fonts',    component: FontsPreview },
     { path: '/buttons',  component: ButtonPreview },
+    { path: '/:pathMatch(.*)*',  component: NotFoundPage },
   ],
   scrollBehavior: () => ({ top: 0 }),
 })
