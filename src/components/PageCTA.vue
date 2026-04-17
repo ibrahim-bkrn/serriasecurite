@@ -10,7 +10,7 @@
       <p class="page-cta__sub">{{ subtitle }}</p>
       <div class="page-cta__actions">
         <router-link to="/contact" class="page-cta__btn page-cta__btn--primary">
-          <span>Demander un audit gratuit</span>
+          <span>Demander un devis</span>
           <div class="page-cta__btn-arrow">
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
               <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -21,7 +21,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="currentColor"/>
           </svg>
-          <span>Être rappelé sous 30 min</span>
+          <span>Être rappelé</span>
         </a>
       </div>
       <div class="page-cta__badges">
@@ -38,7 +38,7 @@ import bgImg from '../assets/photos/identite2.jpeg'
 defineProps({
   label:    { type: String, default: 'Passez à l\'action' },
   title:    { type: String, default: 'Protégez votre site\ndès aujourd\'hui.' },
-  subtitle: { type: String, default: 'Intervention sous 48h · Devis gratuit en 30 min · Toute l\'Île-de-France' },
+  subtitle: { type: String, default: 'Intervention sous 48h · Devis gratuit · Toute l\'Île-de-France' },
   phone:    { type: String, default: '0782564979' },
 })
 

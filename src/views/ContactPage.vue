@@ -12,11 +12,11 @@
         </nav>
         <p class="c-hero__label">Parlons de votre projet</p>
         <h1 class="c-hero__title">
-          Audit gratuit<br />
-          <span class="c-hero__title-stroke">en 30 min.</span>
+          Sécurisons<br />
+          <span class="c-hero__title-stroke">votre bien.</span>
         </h1>
         <p class="c-hero__sub">
-          Décrivez votre besoin, nous revenons vers vous sous 30 minutes
+          Décrivez votre besoin, nous revenons vers vous rapidement
           avec une solution adaptée à votre site et votre budget.
         </p>
       </div>
@@ -41,7 +41,7 @@
           <div class="c-info__block">
             <span class="c-info__title">Téléphone direct</span>
             <a href="tel:0782564979" class="c-info__phone">07 82 56 49 79</a>
-            <p class="c-info__phone-sub">Rappel garanti sous 30 min</p>
+            <p class="c-info__phone-sub">Réponse sous 24h</p>
           </div>
 
           <div class="c-info__badges">
@@ -112,7 +112,7 @@
                   </svg>
                 </div>
               </button>
-              <p class="c-form__mention">Réponse garantie sous 30 minutes</p>
+              <p class="c-form__mention">Nous vous répondons sous 24h</p>
             </div>
           </form>
         </div>
@@ -134,7 +134,7 @@
             </svg>
             <span>07 82 56 49 79</span>
           </a>
-          <p class="c-recall__time">Rappel sous 30 min garanti</p>
+          <p class="c-recall__time">Réponse garantie</p>
         </div>
       </div>
     </section>
@@ -175,7 +175,7 @@ function validate() {
 function submitForm() {
   if (!validate()) return
   // Construction du mailto avec les infos du formulaire
-  const subject = encodeURIComponent(`Demande d'audit gratuit – Sierra Sécurité`)
+  const subject = encodeURIComponent(`Demande de devis – Sierra Sécurité`)
   const body = encodeURIComponent(
     `Nom : ${form.nom}\nTéléphone : ${form.telephone}\nEmail : ${form.email}\nBesoin : ${form.besoin || 'Non précisé'}\nLocalisation : ${form.localisation || 'Non précisée'}\n\nMessage :\n${form.message}`
   )

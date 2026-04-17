@@ -28,8 +28,8 @@
           <div class="footer__contact">
             <p>Île-de-France</p>
             <a href="tel:0782564979" class="footer__contact-phone">07 82 56 49 79</a>
-            <p class="footer__contact-highlight">Audit gratuit en 30 min</p>
-            <router-link to="/contact" class="footer__contact-cta">Demander un audit →</router-link>
+            <p class="footer__contact-highlight">Devis gratuit · Réponse rapide</p>
+            <router-link to="/contact" class="footer__contact-cta">Nous contacter →</router-link>
           </div>
         </div>
       </div>

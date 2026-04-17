@@ -26,14 +26,14 @@
         </div>
         <div class="sh-hero__actions">
           <router-link to="/contact" class="sh-cta-primary">
-            <span>Demander un audit gratuit</span>
+            <span>Demander un devis</span>
             <div class="sh-cta-primary__arrow">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
           </router-link>
-          <a href="tel:0782564979" class="sh-cta-secondary">Être rappelé sous 30 min</a>
+          <a href="tel:0782564979" class="sh-cta-secondary">Être rappelé</a>
         </div>
       </div>
       <div class="sh-hero__right">
@@ -157,7 +157,7 @@
     <PageCTA
       label="Prêt à sécuriser votre site ?"
       title="Déployons vos agents dès demain."
-      subtitle="Audit gratuit · Agents CNAPS · Déploiement 24h · Toute l'Île-de-France"
+      subtitle="Devis gratuit · Agents CNAPS · Déploiement 24h · Toute l'Île-de-France"
     />
 
     <FooterSection />

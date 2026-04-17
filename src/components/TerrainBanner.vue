@@ -9,7 +9,7 @@
         <span class="terrain__text-gold">Intervention sous 48h en Île-de-France.</span>
       </p>
       <router-link to="/contact" class="terrain__cta">
-        <span>Demander un audit gratuit</span>
+        <span>Demander un devis</span>
         <div class="terrain__cta-arrow">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
