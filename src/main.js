@@ -4,6 +4,9 @@ import App from './App.vue'
 
 import HomePage from './views/HomePage.vue'
 import SurveillanceHumainePage from './views/solutions/SurveillanceHumainePage.vue'
+import SurveillanceMateriellePage from './views/solutions/SurveillanceMateriellePage.vue'
+import ChantierPage from './views/secteurs/ChantierPage.vue'
+import BiensVacantsPage from './views/secteurs/BiensVacantsPage.vue'
 import ContactPage from './views/ContactPage.vue'
 import NotFoundPage from './views/NotFoundPage.vue'
 import FontsPreview from './views/FontsPreview.vue'
@@ -19,6 +22,9 @@ const router = createRouter({
   routes: [
     { path: '/',                                  component: HomePage },
     { path: '/solutions/surveillance-humaine',    component: SurveillanceHumainePage },
+    { path: '/solutions/surveillance-materielle', component: SurveillanceMateriellePage },
+    { path: '/secteurs/chantiers',                component: ChantierPage },
+    { path: '/secteurs/biens-vacants',            component: BiensVacantsPage },
     { path: '/contact',                           component: ContactPage },
     { path: '/design/a', component: DesignA },
     { path: '/design/b', component: DesignB },

@@ -10,7 +10,7 @@
           <span>/</span>
           <router-link to="/solutions/surveillance-humaine">Surveillance humaine</router-link>
         </nav>
-        <p class="sh-hero__label">Nos solutions</p>
+        <p class="sh-hero__label">Gardiennage humain</p>
         <h1 class="sh-hero__title">
           Surveillance<br />
           <span class="sh-hero__title-stroke">Humaine</span>
@@ -26,7 +26,7 @@
         </div>
         <div class="sh-hero__actions">
           <router-link to="/contact" class="sh-cta-primary">
-            <span>Demander un devis</span>
+            <span>Parler à un responsable sécurité</span>
             <div class="sh-cta-primary__arrow">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -50,7 +50,7 @@
     <section class="sh-why" ref="whyRef">
       <div class="sh-why__container">
         <div class="sh-why__left reveal" :class="{ visible: whyVis }">
-          <p class="section-label">Gardiennage professionnel</p>
+          <p class="section-label">serria securité</p>
           <h2 class="sh-why__title">Pourquoi choisir<br /><span class="gold">notre gardiennage ?</span></h2>
           <p class="sh-why__intro">
             Dans certaines situations, rien ne remplace une présence humaine sur site.
@@ -63,6 +63,9 @@
           </div>
         </div>
         <div class="sh-why__right">
+          <p class="sh-why__threats-intro reveal" :class="{ visible: whyVis }">
+            Protection active contre 
+          </p>
           <div
             v-for="(threat, i) in threats"
             :key="threat"
@@ -76,46 +79,15 @@
       </div>
     </section>
 
-    <!-- ── PROFILS AGENTS ── -->
-    <section class="sh-agents" ref="agRef">
-      <div class="sh-agents__container">
-        <div class="sh-agents__header">
-          <p class="section-label reveal" :class="{ visible: agVis }">Nos profils</p>
-          <h2 class="section-title reveal reveal-delay-1" :class="{ visible: agVis }">3 TYPES D'AGENTS</h2>
-          <p class="section-sub reveal reveal-delay-2" :class="{ visible: agVis }">
-            Chaque mission bénéficie du profil adapté à votre environnement et vos risques.
-          </p>
-        </div>
-
-        <div class="sh-agents__grid">
-          <div
-            v-for="(agent, i) in agents"
-            :key="agent.title"
-            class="sh-agent-card reveal"
-            :class="[`reveal-delay-${i + 1}`, { visible: agVis }]"
-          >
-            <div class="sh-agent-card__top">
-              <span class="sh-agent-card__num">{{ String(i + 1).padStart(2, '0') }}</span>
-              <span class="sh-agent-card__tag">{{ agent.tag }}</span>
-            </div>
-            <h3 class="sh-agent-card__title">{{ agent.title }}</h3>
-            <p class="sh-agent-card__desc">{{ agent.desc }}</p>
-            <ul class="sh-agent-card__features">
-              <li v-for="f in agent.features" :key="f">
-                <span class="sh-agent-card__dot"></span>{{ f }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ── MÉTHODE ── -->
     <section class="sh-method" ref="mRef">
       <div class="sh-method__container">
         <div class="sh-method__header">
           <p class="section-label reveal" :class="{ visible: mVis }">Notre process</p>
           <h2 class="section-title reveal reveal-delay-1" :class="{ visible: mVis }">DÉPLOIEMENT EN 5 ÉTAPES</h2>
+          <p class="sh-method__intro reveal reveal-delay-2" :class="{ visible: mVis }">
+            Pas d'agent placé au hasard. Chaque mission est cadrée, suivie et adaptée à votre site.
+          </p>
         </div>
         <div class="sh-method__steps">
           <div
@@ -134,20 +106,83 @@
       </div>
     </section>
 
-    <!-- ── SITES ── -->
-    <section class="sh-sites" ref="sRef">
-      <div class="sh-sites__container">
-        <p class="section-label reveal" :class="{ visible: sVis }">Où nous intervenons</p>
-        <h2 class="section-title reveal reveal-delay-1" :class="{ visible: sVis }">SITES CONCERNÉS</h2>
-        <div class="sh-sites__grid">
+    <!-- ── PROFILS AGENTS ── -->
+    <section class="sh-agents" ref="agRef">
+      <div class="sh-agents__container">
+        <div class="sh-agents__header">
+          <p class="section-label reveal" :class="{ visible: agVis }">Nos profils d’agents de sécurité</p>
+          <h2 class="section-title reveal reveal-delay-1" :class="{ visible: agVis }">3 TYPES D'AGENTS</h2>
+          <p class="section-sub reveal reveal-delay-2" :class="{ visible: agVis }">
+            Chaque mission bénéficie du profil adapté à votre environnement et vos risques.
+          </p>
+        </div>
+
+        <div class="sh-accordion reveal reveal-delay-2" :class="{ visible: agVis }">
           <div
-            v-for="(site, i) in sites"
-            :key="site.label"
-            class="sh-site reveal"
+            v-for="(agent, i) in agents"
+            :key="agent.title"
+            class="sh-accordion__item"
+            :class="{ 'sh-accordion__item--open': activeAgent === i }"
+            @click="activeAgent = activeAgent === i ? null : i"
+          >
+            <div class="sh-accordion__header">
+              <span class="sh-accordion__num">{{ String(i + 1).padStart(2, '0') }}</span>
+              <div class="sh-accordion__titles">
+                <span class="sh-accordion__tag">{{ agent.tag }}</span>
+                <h3 class="sh-accordion__title">{{ agent.title }}</h3>
+              </div>
+              <span class="sh-accordion__chevron">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="sh-accordion__body">
+              <div class="sh-accordion__body-inner">
+                <p class="sh-accordion__desc">{{ agent.desc }}</p>
+                <ul class="sh-accordion__features">
+                  <li v-for="f in agent.features" :key="f">
+                    <span class="sh-accordion__dot"></span>{{ f }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CROSS-SELL V3 : carte sombre bordée or ── -->
+    <section class="cs-v3-wrap">
+      <div class="cs-v3">
+        <span class="cs-v3__badge">Solution complémentaire</span>
+        <h2 class="cs-v3__title">Et si vous ajoutez à cela<br />une surveillance matérielle ?</h2>
+        <p class="cs-v3__text">Quand la sécurité est fragmentée, les failles apparaissent. SIERRA SÉCURITÉ intègre l’humain et la technologie pour une protection cohérente, réactive et maîtrisée, du terrain au centre de contrôle..</p>
+        <router-link to="/solutions/surveillance-materielle" class="cs-v3__cta">
+          Protection totale
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </router-link>
+      </div>
+    </section>
+
+    <!-- ── ENGAGEMENTS ── -->
+    <section class="sh-engagements" ref="sRef">
+      <div class="sh-engagements__container">
+        <p class="section-label reveal" :class="{ visible: sVis }">Sierra Sécurité</p>
+        <h2 class="section-title reveal reveal-delay-1" :class="{ visible: sVis }">NOS ENGAGEMENTS</h2>
+        <div class="sh-engagements__grid">
+          <div
+            v-for="(eng, i) in engagements"
+            :key="eng"
+            class="sh-engagement reveal"
             :class="[`reveal-delay-${i + 1}`, { visible: sVis }]"
           >
-            <div class="sh-site__icon" v-html="site.icon"></div>
-            <span class="sh-site__label">{{ site.label }}</span>
+            <span class="sh-engagement__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" />
+              </svg>
+            </span>
+            <span class="sh-engagement__text">{{ eng }}</span>
           </div>
         </div>
       </div>
@@ -171,6 +206,17 @@ import FooterSection from '../../components/FooterSection.vue'
 import PageCTA       from '../../components/PageCTA.vue'
 
 import heroImg from '../../assets/photos/gardiennage.jpeg'
+
+const activeAgent = ref(null)
+
+const engagements = [
+  'Réactivité express — mise en place possible en 24h',
+  'Suivi personnalisé — référent unique, rapport structuré',
+  'Agents encadrés, identifiables et équipés Sierra',
+  'Prestations multi-services : gardiennage, alarme, télésurveillance',
+  'Relation de confiance & retour terrain continu',
+  'Contrôle qualité régulier & accompagnement client actif',
+]
 
 const agents = [
   {
@@ -227,14 +273,6 @@ const steps = [
   { title: 'Suivi opérationnel continu', text: 'Rapports d\'intervention détaillés transmis selon vos préférences. Contrôle qualité régulier et référent unique dédié.' },
 ]
 
-const sites = [
-  { label: 'Chantiers BTP',        icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2.05V4h4v2h-1v14H8V6H7V4h4V2.05c-3.95.49-7 3.85-7 7.95 0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.1-3.05-7.46-7-7.95z" fill="currentColor"/></svg>' },
-  { label: 'Entrepôts & logistique', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" fill="currentColor"/></svg>' },
-  { label: 'Biens vacants',         icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/></svg>' },
-  { label: 'Commerces & bureaux',   icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M2 7h20v2H2V7zm2 4h16v9H4v-9zm4 2v5h8v-5H8z" fill="currentColor"/></svg>' },
-  { label: 'Écoles & équipements publics', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" fill="currentColor"/></svg>' },
-  { label: 'Parkings & espaces ouverts', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z" fill="currentColor"/></svg>' },
-]
 
 // Intersection observers
 const stRef  = ref(null); const stVis  = ref(false)
@@ -582,6 +620,15 @@ onMounted(() => {
   flex-direction: column;
 }
 
+.sh-why__threats-intro {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+}
+
 .sh-why__threat {
   display: flex;
   align-items: center;
@@ -654,95 +701,122 @@ onMounted(() => {
   line-height: 1.7;
 }
 
-.sh-agents__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--color-border);
+.sh-accordion {
+  border-top: 1px solid var(--color-border);
 }
 
-.sh-agent-card {
-  background: var(--color-bg-2);
-  padding: 40px 36px;
+.sh-accordion__item {
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.sh-accordion__item--open {
+  border-bottom-color: var(--color-gold);
+}
+
+.sh-accordion__header {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 0;
+  user-select: none;
+}
+
+.sh-accordion__num {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-gold);
+  opacity: 0.5;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  transition: opacity 0.3s;
+}
+
+.sh-accordion__item--open .sh-accordion__num { opacity: 1; }
+
+.sh-accordion__titles {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  transition: background 0.3s;
+  gap: 4px;
 }
 
-.sh-agent-card:hover { background: rgba(201, 162, 96, 0.04); }
-
-.sh-agent-card__top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 4px;
-}
-
-.sh-agent-card__num {
-  font-family: var(--font-display);
-  font-size: 52px;
-  font-weight: 800;
-  color: rgba(201, 162, 96, 0.15);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  transition: color 0.3s;
-}
-
-.sh-agent-card:hover .sh-agent-card__num { color: rgba(201, 162, 96, 0.4); }
-
-.sh-agent-card__tag {
-  font-family: var(--font-body);
+.sh-accordion__tag {
   font-size: 10px;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold);
-  border: 1px solid rgba(201, 162, 96, 0.2);
-  padding: 4px 10px;
-  text-align: right;
-  line-height: 1.4;
+  opacity: 0.7;
 }
 
-.sh-agent-card__title {
+.sh-accordion__title {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: clamp(20px, 2.5vw, 28px);
   font-weight: 800;
   text-transform: uppercase;
   color: var(--color-white);
   letter-spacing: 0.03em;
   line-height: 1;
+  transition: color 0.3s;
 }
 
-.sh-agent-card__desc {
-  font-family: var(--font-body);
-  font-size: 13px;
+.sh-accordion__chevron {
+  color: var(--color-gold);
+  opacity: 0.5;
+  transition: transform 0.35s ease, opacity 0.3s;
+  flex-shrink: 0;
+}
+
+.sh-accordion__item--open .sh-accordion__chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.sh-accordion__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+  overflow: hidden;
+}
+
+.sh-accordion__item--open .sh-accordion__body {
+  grid-template-rows: 1fr;
+}
+
+.sh-accordion__body-inner {
+  overflow: hidden;
+}
+
+.sh-accordion__desc {
+  font-size: 14px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 20px;
+  max-width: 600px;
 }
 
-.sh-agent-card__features {
+.sh-accordion__features {
   list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  padding-bottom: 32px;
 }
 
-.sh-agent-card__features li {
+.sh-accordion__features li {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 300;
   color: var(--color-text);
 }
 
-.sh-agent-card__dot {
+.sh-accordion__dot {
   width: 5px;
   height: 5px;
   background: var(--color-gold);
@@ -763,6 +837,14 @@ onMounted(() => {
 }
 
 .sh-method__header { margin-bottom: 72px; }
+
+.sh-method__intro {
+  margin-top: 20px;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 680px;
+}
 
 .sh-method__steps {
   display: flex;
@@ -810,20 +892,189 @@ onMounted(() => {
   max-width: 560px;
 }
 
-/* ── SITES ── */
-.sh-sites {
-  background: var(--color-bg);
-  padding: 120px 0;
+/* ── CROSS-SELL ── */
+.sh-crossell {
   border-top: 1px solid var(--color-border);
 }
 
-.sh-sites__container {
+.sh-crossell__container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 80px;
 }
 
-.sh-sites__grid {
+.sh-crossell__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 36px 0;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.sh-crossell__body:hover .sh-crossell__cta { gap: 16px; }
+.sh-crossell__body:hover { background: rgba(201, 162, 96, 0.03); }
+
+.sh-crossell__title {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.sh-crossell__title-sub {
+  color: var(--color-gold);
+}
+
+.sh-crossell__text {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-muted);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.sh-crossell__cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  transition: gap 0.25s ease;
+}
+
+/* ── CROSS-SELL ── */
+
+/* V3 — carte sombre bordée or */
+.cs-v3-wrap {
+  padding: 80px 0;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+}
+.cs-v3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid rgba(201, 162, 96, 0.35);
+  padding: 56px 80px;
+  max-width: 700px;
+  width: 100%;
+  transition: border-color 0.3s, background 0.3s;
+}
+.cs-v3__badge {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid rgba(201, 162, 96, 0.3);
+  padding: 4px 14px;
+  margin-bottom: 32px;
+  display: inline-block;
+}
+.cs-v3__title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.cs-v3__text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.cs-v3__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-gold);
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 13px 24px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.cs-v3__cta:hover { opacity: 0.85; }
+
+/* V3b — carte or inversée */
+.cs-v3b-wrap {
+  padding: 80px 0;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+}
+.cs-v3b {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  background: var(--color-gold);
+  padding: 56px 80px;
+  max-width: 700px;
+  width: 100%;
+  gap: 32px;
+  transition: opacity 0.25s;
+}
+.cs-v3b:hover { opacity: 0.9; }
+.cs-v3b__title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #000;
+  line-height: 1.15;
+}
+.cs-v3b__cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #000;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  padding-bottom: 3px;
+}
+
+/* ── ENGAGEMENTS ── */
+.sh-engagements {
+  background: var(--color-bg);
+  padding: 120px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.sh-engagements__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.sh-engagements__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
@@ -831,7 +1082,7 @@ onMounted(() => {
   background: var(--color-border);
 }
 
-.sh-site {
+.sh-engagement {
   background: var(--color-bg-2);
   padding: 40px 36px;
   display: flex;
@@ -840,29 +1091,29 @@ onMounted(() => {
   transition: background 0.3s;
 }
 
-.sh-site:hover { background: rgba(201, 162, 96, 0.05); }
+.sh-engagement:hover { background: rgba(201, 162, 96, 0.05); }
 
-.sh-site__icon {
+.sh-engagement__icon {
   color: var(--color-gold);
   flex-shrink: 0;
   opacity: 0.8;
 }
 
-.sh-site__label {
-  font-family: var(--font-body);
+.sh-engagement__text {
   font-size: 14px;
   font-weight: 400;
   color: var(--color-text);
   letter-spacing: 0.02em;
+  line-height: 1.4;
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1200px) {
   .sh-hero__left { padding: 80px 48px 80px 40px; }
   .sh-agents__container, .sh-method__container,
-  .sh-sites__container, .sh-statement__container,
+  .sh-statement__container, .sh-engagements__container,
   .sh-why__container { padding: 0 40px; }
-  .sh-agents__grid { grid-template-columns: repeat(3, 1fr); }
+  .sh-engagements__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 1024px) {
@@ -874,30 +1125,38 @@ onMounted(() => {
   .sh-statement__container { grid-template-columns: 4px 1fr; }
   .sh-statement__body { grid-column: 2; }
   .sh-why__container { grid-template-columns: 1fr; gap: 48px; }
-  .sh-agents__grid { grid-template-columns: 1fr; }
-  .sh-sites__grid { grid-template-columns: repeat(2, 1fr); }
+  /* cross-sell tablet */
+  .cs-v3 { padding: 48px 40px; }
+  .cs-v3b__top { padding: 40px; }
+  .cs-v3b__footer { padding: 20px 40px; }
 }
 
 @media (max-width: 768px) {
   /* Fix double padding : .sh-hero a déjà padding-top: 72px */
   .sh-hero__left { padding: 32px 24px 48px; }
   .sh-agents__container, .sh-method__container,
-  .sh-sites__container, .sh-statement__container { padding: 0 24px; }
+  .sh-statement__container, .sh-engagements__container { padding: 0 24px; }
   .sh-why { padding: 72px 0; }
   .sh-why__container { padding: 0 24px; }
   .sh-agents { padding: 80px 0; }
   .sh-method { padding: 80px 0; }
-  .sh-sites { padding: 80px 0; }
+  .sh-engagements { padding: 80px 0; }
+  .sh-engagements__grid { grid-template-columns: 1fr; }
   .sh-statement { padding: 72px 0; }
   .sh-statement__container { grid-template-columns: 1fr; gap: 32px; }
   .sh-statement__line { display: none; }
   .sh-step { grid-template-columns: 80px 1fr; gap: 20px; padding: 28px 0; }
   .sh-step__num { font-size: 40px; }
-  .sh-sites__grid { grid-template-columns: 1fr; }
-  .sh-agent-card { padding: 28px 20px; }
+
   .sh-hero__img { filter: saturate(0.6) brightness(1.05); }
   .sh-hero__img-overlay { background: linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.15) 100%); }
   .sh-hero__actions { flex-direction: column; }
   .sh-cta-primary, .sh-cta-secondary { justify-content: center; }
+  /* cross-sell mobile */
+  .cs-v3-wrap { padding: 48px 24px; }
+  .cs-v3 { padding: 36px 24px; }
+  .cs-v3b-wrap { padding: 48px 24px; }
+  .cs-v3b__top { padding: 36px 24px; }
+  .cs-v3b__footer { padding: 18px 24px; }
 }
 </style>
