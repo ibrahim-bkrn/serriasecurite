@@ -3,8 +3,8 @@
     <!-- Left content -->
     <div class="hero__left">
       <div class="hero__brand">
-        <span class="hero__brand-mark"><img src="/src/assets/logo/Logo 2 Verticale.png" alt="" width="80px"></span>
-        <!--<span class="hero__brand-name">
+        <!--<span class="hero__brand-mark"><img src="/src/assets/logo/Logo 2 Verticale.png" alt="" width="80px"></span>
+        <span class="hero__brand-name">
           <span class="hero__brand-dot"></span>
           Systèmes de sécurité & gardiennage
           <span class="hero__brand-dot"></span>
@@ -13,19 +13,20 @@
 
       <h1 class="hero__title">
         Protégez vos biens.<br />
-        <!--en<br />-->
         <span class="hero__title-stroke">Sécurisez</span><br />
         vos espaces.
       </h1>
 
-      <div class="hero__meta">
+      <p class="hero__intro">Sierra Sécurité accompagne particuliers et professionnels dans la mise en place de solutions de sécurité durables, adaptées à chaque environnement.</p>
+
+      <!--<div class="hero__meta">
         <span class="hero__meta-pill">CNAPS certifiés</span>
         <span class="hero__meta-pill">48h déploiement</span>
         <span class="hero__meta-pill">24/7</span>
-      </div>
+      </div>-->
 
-      <router-link to="/contact" class="hero__cta">
-        <span>SÉCURISER MON BIEN</span>
+      <router-link :to="{ path: '/', hash: '#solutions' }" class="hero__cta">
+        <span>NOS SERVICES</span>
         <div class="hero__cta-arrow">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -143,6 +144,15 @@ const services = [
 .hero__title-stroke {
   -webkit-text-stroke: 2px rgba(201, 162, 96, 0.5);
   color: transparent;
+}
+
+.hero__intro {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-muted);
+  margin-bottom: 32px;
+  max-width: 580px;
 }
 
 .hero__meta {
@@ -303,7 +313,7 @@ const services = [
     flex-direction: column;
   }
   .hero__cell {
-    height: 220px;
+    height: 250px;
   }
 }
 </style>

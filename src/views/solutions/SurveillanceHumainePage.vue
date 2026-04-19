@@ -19,11 +19,6 @@
           Des agents certifiés CNAPS, déployés en 24h sur toute l'Île-de-France.
           Présence dissuasive, rondes et intervention immédiate.
         </p>
-        <div class="sh-hero__pills">
-          <span>Agréé CNAPS</span>
-          <span>Déploiement 24h</span>
-          <span>24/7</span>
-        </div>
         <div class="sh-hero__actions">
           <router-link to="/contact" class="sh-cta-primary">
             <span>Parler à un responsable sécurité</span>
@@ -61,6 +56,14 @@
             <div class="sh-why__callout-line"></div>
             <p>Surveillance crédible, effet dissuasif fort et tranquillité immédiate — même en contexte tendu.</p>
           </div>
+          <router-link to="/contact" class="sh-cta-primary">
+            <span>Parlons-en plus en détails</span>
+            <div class="sh-cta-primary__arrow">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </router-link>
         </div>
         <div class="sh-why__right">
           <p class="sh-why__threats-intro reveal" :class="{ visible: whyVis }">
@@ -83,11 +86,16 @@
     <section class="sh-method" ref="mRef">
       <div class="sh-method__container">
         <div class="sh-method__header">
-          <p class="section-label reveal" :class="{ visible: mVis }">Notre process</p>
-          <h2 class="section-title reveal reveal-delay-1" :class="{ visible: mVis }">DÉPLOIEMENT EN 5 ÉTAPES</h2>
-          <p class="sh-method__intro reveal reveal-delay-2" :class="{ visible: mVis }">
-            Pas d'agent placé au hasard. Chaque mission est cadrée, suivie et adaptée à votre site.
-          </p>
+          <div class="sh-method__header-text">
+            <p class="section-label reveal" :class="{ visible: mVis }">Notre process</p>
+            <h2 class="section-title reveal reveal-delay-1" :class="{ visible: mVis }">DÉPLOIEMENT EN 5 ÉTAPES</h2>
+            <p class="sh-method__intro reveal reveal-delay-2" :class="{ visible: mVis }">
+              Pas d'agent placé au hasard. Chaque mission est cadrée, suivie et adaptée à votre site.
+            </p>
+          </div>
+          <div class="sh-method__header-logo">
+            <img :src="logoFond" alt="" class="sh-method__logo" />
+          </div>
         </div>
         <div class="sh-method__steps">
           <div
@@ -153,7 +161,7 @@
     </section>
 
     <!-- ── CROSS-SELL V3 : carte sombre bordée or ── -->
-    <section class="cs-v3-wrap">
+    <section class="cs-v3-wrap" :style="{ backgroundImage: `url(${crossImg})` }">
       <div class="cs-v3">
         <span class="cs-v3__badge">Solution complémentaire</span>
         <h2 class="cs-v3__title">Et si vous ajoutez à cela<br />une surveillance matérielle ?</h2>
@@ -205,7 +213,9 @@ import NavBar        from '../../components/NavBar.vue'
 import FooterSection from '../../components/FooterSection.vue'
 import PageCTA       from '../../components/PageCTA.vue'
 
-import heroImg from '../../assets/photos/gardiennage.jpeg'
+import heroImg   from '../../assets/photos/gardiennage.jpeg'
+import crossImg  from '../../assets/photos/videosurveillance.jpg'
+import logoFond  from '../../assets/logo/Logo de fond 1.png'
 
 const activeAgent = ref(null)
 
@@ -299,7 +309,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.sh-page { background: var(--color-bg); }
+.sh-page { background: var(--color-bg); overflow-x: hidden; }
 
 /* ── HERO ── */
 .sh-hero {
@@ -589,13 +599,14 @@ onMounted(() => {
   color: var(--color-muted);
   line-height: 1.8;
   max-width: 440px;
-  margin-bottom: 36px;
+  margin-bottom: 25px;
 }
 
 .sh-why__callout {
   display: flex;
   gap: 20px;
   align-items: flex-start;
+  margin-bottom: 20px;
 }
 
 .sh-why__callout-line {
@@ -608,7 +619,7 @@ onMounted(() => {
 
 .sh-why__callout p {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   color: var(--color-text);
   line-height: 1.7;
@@ -662,7 +673,7 @@ onMounted(() => {
 }
 
 .sh-agents__container {
-  max-width: 1280px;
+  max-width: 70%;
   margin: 0 auto;
   padding: 0 80px;
 }
@@ -711,9 +722,6 @@ onMounted(() => {
   transition: border-color 0.3s;
 }
 
-.sh-accordion__item--open {
-  border-bottom-color: var(--color-gold);
-}
 
 .sh-accordion__header {
   display: flex;
@@ -836,7 +844,30 @@ onMounted(() => {
   padding: 0 80px;
 }
 
-.sh-method__header { margin-bottom: 72px; }
+.sh-method__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 72px;
+}
+
+.sh-method__header-text { flex: 1; }
+
+.sh-method__header-logo {
+  flex-shrink: 0;
+  opacity: 0.9;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sh-method__logo {
+  height: 130px;
+  width: auto;
+  display: block;
+}
 
 .sh-method__intro {
   margin-top: 20px;
@@ -866,13 +897,11 @@ onMounted(() => {
   font-family: var(--font-display);
   font-size: 56px;
   font-weight: 800;
-  color: rgba(201, 162, 96, 0.2);
+  color: var(--color-gold);
   line-height: 1;
   letter-spacing: -0.02em;
   transition: color 0.3s;
 }
-
-.sh-step:hover .sh-step__num { color: var(--color-gold); }
 
 .sh-step__title {
   font-family: var(--font-body);
@@ -957,18 +986,30 @@ onMounted(() => {
 /* V3 — carte sombre bordée or */
 .cs-v3-wrap {
   padding: 80px 0;
-  background: var(--color-bg);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
 }
+
+.cs-v3-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 6, 0.9);
+  z-index: 0;
+}
+
+.cs-v3-wrap > * { position: relative; z-index: 1; }
+
 .cs-v3 {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   text-decoration: none;
+  background: var(--color-bg);
   border: 1px solid rgba(201, 162, 96, 0.35);
   padding: 56px 80px;
   max-width: 700px;
@@ -1120,7 +1161,7 @@ onMounted(() => {
   .sh-hero { flex-direction: column; height: auto; max-height: none; overflow: visible; }
   .sh-hero__left { width: 100%; border-right: none; border-bottom: 1px solid var(--color-border); padding: 32px 40px 48px; }
   .sh-hero__left::before { display: none; }
-  .sh-hero__right { height: 45vh; min-height: 280px; }
+  .sh-hero__right { height: 340px; min-height: unset; }
   .sh-hero__stat-card { display: none; }
   .sh-statement__container { grid-template-columns: 4px 1fr; }
   .sh-statement__body { grid-column: 2; }
@@ -1132,31 +1173,46 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
-  /* Fix double padding : .sh-hero a déjà padding-top: 72px */
-  .sh-hero__left { padding: 32px 24px 48px; }
+  .sh-hero__left { padding: 32px 20px 40px; }
+  .sh-hero__right { height: 280px; }
   .sh-agents__container, .sh-method__container,
-  .sh-statement__container, .sh-engagements__container { padding: 0 24px; }
-  .sh-why { padding: 72px 0; }
-  .sh-why__container { padding: 0 24px; }
-  .sh-agents { padding: 80px 0; }
-  .sh-method { padding: 80px 0; }
-  .sh-engagements { padding: 80px 0; }
+  .sh-statement__container, .sh-engagements__container { padding: 0 20px; }
+  .sh-why { padding: 56px 0; }
+  .sh-why__container { padding: 0 20px; }
+  .sh-agents { padding: 56px 0; }
+  .sh-method { padding: 56px 0; }
+  .sh-engagements { padding: 56px 0; }
   .sh-engagements__grid { grid-template-columns: 1fr; }
-  .sh-statement { padding: 72px 0; }
+  .sh-statement { padding: 56px 0; }
   .sh-statement__container { grid-template-columns: 1fr; gap: 32px; }
   .sh-statement__line { display: none; }
-  .sh-step { grid-template-columns: 80px 1fr; gap: 20px; padding: 28px 0; }
-  .sh-step__num { font-size: 40px; }
+  .sh-step { grid-template-columns: 64px 1fr; gap: 16px; padding: 24px 0; }
+  .sh-step__num { font-size: 36px; }
+
+  /* method header : logo caché, texte pleine largeur */
+  .sh-method__header { flex-direction: column; gap: 0; }
+  .sh-method__header-logo { display: none; }
 
   .sh-hero__img { filter: saturate(0.6) brightness(1.05); }
   .sh-hero__img-overlay { background: linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.15) 100%); }
   .sh-hero__actions { flex-direction: column; }
   .sh-cta-primary, .sh-cta-secondary { justify-content: center; }
+
+  /* accordion mobile */
+  .sh-agents__container {max-width: 100%;}
+  .sh-agents__header { margin-bottom: 40px; }
+  .sh-accordion__header { gap: 14px; padding: 18px 0; }
+  .sh-accordion__num { font-size: 11px; }
+  .sh-accordion__title { font-size: 17px; }
+  .sh-accordion__tag { font-size: 9px; }
+  .sh-accordion__desc { max-width: 100%; }
+  .sh-accordion__features { gap: 8px 12px; }
+
   /* cross-sell mobile */
-  .cs-v3-wrap { padding: 48px 24px; }
-  .cs-v3 { padding: 36px 24px; }
-  .cs-v3b-wrap { padding: 48px 24px; }
-  .cs-v3b__top { padding: 36px 24px; }
-  .cs-v3b__footer { padding: 18px 24px; }
+  .cs-v3-wrap { padding: 80px 20px; }
+  .cs-v3 { padding: 32px 20px; }
+  .cs-v3b-wrap { padding: 40px 20px; }
+  .cs-v3b__top { padding: 32px 20px; }
+  .cs-v3b__footer { padding: 16px 20px; }
 }
 </style>

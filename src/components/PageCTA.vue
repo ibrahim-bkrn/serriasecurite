@@ -24,9 +24,6 @@
           <span>Être rappelé</span>
         </a>
       </div>
-      <div class="page-cta__badges">
-        <span v-for="b in badges" :key="b" class="page-cta__badge">{{ b }}</span>
-      </div>
     </div>
   </section>
 </template>

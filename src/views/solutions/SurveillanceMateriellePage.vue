@@ -392,6 +392,7 @@ onMounted(() => {
   align-items: center;
   gap: 20px;
   padding: 18px 0;
+  margin-bottom: 5px;
 }
 
 .sm-hero__sep-line {

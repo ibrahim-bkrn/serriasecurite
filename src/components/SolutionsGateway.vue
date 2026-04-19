@@ -1,5 +1,5 @@
 <template>
-  <section class="gateway" ref="sectionRef">
+  <section class="gateway" id="solutions" ref="sectionRef">
     <div class="gateway__header reveal" :class="{ visible: visible }">
       <div class="gateway__label-row">
         <span class="gateway__label-line"></span>
@@ -7,7 +7,7 @@
         <span class="gateway__label-line"></span>
       </div>
       <h2 class="gateway__title">DEUX APPROCHES,<br /><span class="gateway__title-stroke">UNE SEULE EXIGENCE</span></h2>
-      <p class="gateway__subtitle">Surveillance humaine ou électronique — choisissez votre dispositif, nous garantissons le même niveau d'excellence.</p>
+      <p class="gateway__subtitle">Surveillance humaine et matérielle — choisissez votre dispositif, nous garantissons le même niveau d'excellence.</p>
     </div>
 
     <div class="gateway__panels">
@@ -31,14 +31,14 @@
           <h3 class="gateway__panel-title">{{ panel.title }}</h3>
           <p class="gateway__panel-desc">{{ panel.desc }}</p>
 
-          <ul class="gateway__panel-list">
+          <!--<ul class="gateway__panel-list">
             <li v-for="item in panel.items" :key="item">
               <svg class="gateway__panel-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               {{ item }}
             </li>
-          </ul>
+          </ul>-->
 
           <div class="gateway__panel-cta">
             <span>Découvrir la solution</span>
@@ -67,7 +67,7 @@ const panels = [
     slug: 'humaine',
     route: '/solutions/surveillance-humaine',
     img: humainImg,
-    tag: 'Agents CNAPS',
+    tag: 'Gardiennage',
     title: 'Surveillance Humaine',
     desc: 'Des agents certifiés CNAPS sur le terrain, disponibles 24h/24 pour assurer présence, dissuasion et intervention immédiate.',
     items: ['Gardiennage & rondes', 'Agents cynophiles', 'Agents mobiles', 'Contrôle d\'accès'],

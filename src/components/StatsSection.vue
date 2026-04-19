@@ -8,7 +8,7 @@
           <span class="gold">RÉDUIRE LES RISQUES</span>
         </h2>
         <p class="stats__subtitle reveal reveal-delay-1" :class="{ visible: vis }">
-          Installer un système d'alarme et de vidéosurveillance, c'est investir dans votre sérénité.
+          Faire appel à Serria Sécurité, c'est investir dans votre sérénité.
           Les bénéfices sont clairs et mesurables
         </p>
       </div>
@@ -18,7 +18,6 @@
         <div class="bento__featured reveal reveal-delay-1" :class="{ visible: gridVis }">
           <span class="featured__eyebrow">Statistique clé</span>
           <span class="featured__number">+80%</span>
-          <div class="featured__line"></div>
           <span class="featured__label">CAMBRIOLAGES ÉVITÉS grâce à la vidéosurveillance</span>
           <router-link to="/contact" class="bento__cta">
             <span>Nous contacter</span>
@@ -222,10 +221,6 @@ onMounted(() => {
   justify-content: flex-end;
   gap: 12px;
   transition: background 0.3s;
-}
-
-.bento__cell:hover {
-  background: rgba(201, 162, 96, 0.06);
 }
 
 .cell__number {

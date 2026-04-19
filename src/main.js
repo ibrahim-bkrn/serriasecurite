@@ -33,7 +33,7 @@ const router = createRouter({
     { path: '/buttons',  component: ButtonPreview },
     { path: '/:pathMatch(.*)*',  component: NotFoundPage },
   ],
-  scrollBehavior: () => ({ top: 0 }),
+  scrollBehavior: (to) => to.hash ? { el: to.hash, behavior: 'smooth' } : { top: 0 },
 })
 
 const app = createApp(App)

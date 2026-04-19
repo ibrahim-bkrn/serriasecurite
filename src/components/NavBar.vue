@@ -578,8 +578,7 @@ onUnmounted(() => {
   text-transform: uppercase;
   color: var(--color-muted);
   text-decoration: none;
-  padding: 10px 0 10px 20px;
-  border-left: 2px solid rgba(201, 162, 96, 0.2);
+  padding: 0px 0 10px 10px;
   margin-bottom: 6px;
   transition: color 0.2s, border-color 0.2s;
 }
