@@ -58,7 +58,7 @@
 
       <div class="navbar__right">
         <router-link to="/contact" class="btn-gold navbar__cta-desktop">
-          <span class="btn-gold__text">Demander un audit</span>
+          <span class="btn-gold__text">Contactez-nous</span>
           <div class="btn-gold__icon">
             <svg height="18" width="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 0h24v24H0z" fill="none"/>

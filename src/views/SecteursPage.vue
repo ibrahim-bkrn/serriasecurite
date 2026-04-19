@@ -30,12 +30,12 @@
           <div class="stat-sep"></div>
           <div class="stat-item">
             <span class="stat-num">92%</span>
-            <span class="stat-lab">Inter &lt; 45min</span>
+            <span class="stat-lab">Interventions &lt; 45min</span>
           </div>
           <div class="stat-sep"></div>
           <div class="stat-item">
-            <span class="stat-num">0</span>
-            <span class="stat-lab">Squat constaté</span>
+            <span class="stat-num">24/7 </span>
+            <span class="stat-lab">Télesurveillance</span>
           </div>
         </div>
       </div>
