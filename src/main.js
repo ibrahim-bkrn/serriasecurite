@@ -6,6 +6,7 @@ import HomePage from './views/HomePage.vue'
 import SurveillanceHumainePage from './views/solutions/SurveillanceHumainePage.vue'
 import SurveillanceMateriellePage from './views/solutions/SurveillanceMateriellePage.vue'
 import ContactPage from './views/ContactPage.vue'
+import SecteursPage from './views/SecteursPage.vue'
 import NotFoundPage from './views/NotFoundPage.vue'
 import FontsPreview from './views/FontsPreview.vue'
 import ButtonPreview from './views/ButtonPreview.vue'
@@ -21,7 +22,8 @@ const router = createRouter({
     { path: '/',                                  component: HomePage },
     { path: '/solutions/surveillance-humaine',    component: SurveillanceHumainePage },
     { path: '/solutions/surveillance-materielle', component: SurveillanceMateriellePage },
-    { path: '/contact',                           component: ContactPage },
+    { path: '/contact',                            component: ContactPage },
+    { path: '/secteurs',                           component: SecteursPage },
     { path: '/design/a', component: DesignA },
     { path: '/design/b', component: DesignB },
     { path: '/design/c', component: DesignC },

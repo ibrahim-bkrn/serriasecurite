@@ -1,7 +1,3 @@
 dist/
 node_modules/
 *.log
-
-# Pages en cours
-src/views/secteurs/ChantierPage.vue
-src/views/secteurs/BiensVacantsPage.vue

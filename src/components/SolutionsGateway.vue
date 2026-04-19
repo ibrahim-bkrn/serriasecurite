@@ -1,8 +1,13 @@
 <template>
   <section class="gateway" ref="sectionRef">
     <div class="gateway__header reveal" :class="{ visible: visible }">
-      <p class="gateway__label">Nos solutions</p>
+      <div class="gateway__label-row">
+        <span class="gateway__label-line"></span>
+        <p class="gateway__label">Nos solutions</p>
+        <span class="gateway__label-line"></span>
+      </div>
       <h2 class="gateway__title">DEUX APPROCHES,<br /><span class="gateway__title-stroke">UNE SEULE EXIGENCE</span></h2>
+      <p class="gateway__subtitle">Surveillance humaine ou électronique — choisissez votre dispositif, nous garantissons le même niveau d'excellence.</p>
     </div>
 
     <div class="gateway__panels">
@@ -13,24 +18,31 @@
         class="gateway__panel reveal"
         :class="[`reveal-delay-${i + 1}`, { visible: visible }]"
       >
-        <img :src="panel.img" :alt="panel.title" class="gateway__panel-img" />
-        <div class="gateway__panel-overlay"></div>
+        <div class="gateway__panel-photo">
+          <img :src="panel.img" :alt="panel.title" class="gateway__panel-img" />
+          <span class="gateway__panel-bg-num">0{{ i + 1 }}</span>
+        </div>
 
-        <div class="gateway__panel-content">
-          <span class="gateway__panel-num">0{{ i + 1 }}</span>
+        <div class="gateway__panel-body">
+          <div class="gateway__panel-header">
+            <span class="gateway__panel-num">0{{ i + 1 }}</span>
+            <span class="gateway__panel-tag">{{ panel.tag }}</span>
+          </div>
           <h3 class="gateway__panel-title">{{ panel.title }}</h3>
           <p class="gateway__panel-desc">{{ panel.desc }}</p>
 
           <ul class="gateway__panel-list">
             <li v-for="item in panel.items" :key="item">
-              <span class="gateway__panel-dot"></span>
+              <svg class="gateway__panel-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
               {{ item }}
             </li>
           </ul>
 
           <div class="gateway__panel-cta">
-            <span>Découvrir</span>
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+            <span>Découvrir la solution</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
               <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
@@ -55,6 +67,7 @@ const panels = [
     slug: 'humaine',
     route: '/solutions/surveillance-humaine',
     img: humainImg,
+    tag: 'Agents CNAPS',
     title: 'Surveillance Humaine',
     desc: 'Des agents certifiés CNAPS sur le terrain, disponibles 24h/24 pour assurer présence, dissuasion et intervention immédiate.',
     items: ['Gardiennage & rondes', 'Agents cynophiles', 'Agents mobiles', 'Contrôle d\'accès'],
@@ -63,6 +76,7 @@ const panels = [
     slug: 'materielle',
     route: '/solutions/surveillance-materielle',
     img: materielImg,
+    tag: 'Installation 48h',
     title: 'Surveillance Matérielle',
     desc: 'Des systèmes électroniques de pointe installés en 48h pour détecter, enregistrer et alerter en temps réel.',
     items: ['Alarme anti-intrusion', 'Vidéosurveillance HD', 'Contrôle d\'accès', 'Porte anti-squat'],
@@ -88,33 +102,63 @@ onMounted(() => {
 /* ── HEADER ── */
 .gateway__header {
   text-align: center;
-  margin-bottom: 72px;
+  margin-bottom: 80px;
   padding: 0 24px;
+}
+
+.gateway__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.gateway__label-line {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201, 162, 96, 0.6));
+}
+
+.gateway__label-row .gateway__label-line:last-child {
+  background: linear-gradient(to left, transparent, rgba(201, 162, 96, 0.6));
 }
 
 .gateway__label {
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--color-gold);
-  margin-bottom: 16px;
+  margin: 0;
 }
 
 .gateway__title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 4vw, 56px);
+  font-size: clamp(36px, 4vw, 58px);
   font-weight: 800;
   text-transform: uppercase;
   color: var(--color-white);
   letter-spacing: 0.02em;
   line-height: 1.1;
+  margin-bottom: 20px;
 }
 
 .gateway__title-stroke {
   -webkit-text-stroke: 2px rgba(201, 162, 96, 0.5);
   color: transparent;
+}
+
+.gateway__subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 /* ── PANELS ── */
@@ -124,16 +168,38 @@ onMounted(() => {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 80px;
-  gap: 2px;
+  gap: 3px;
 }
 
 .gateway__panel {
-  position: relative;
-  height: 540px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
-  display: block;
   cursor: pointer;
+  overflow: hidden;
+}
+
+/* gold top border on hover */
+.gateway__panel::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-gold), rgba(201, 162, 96, 0.3));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.gateway__panel:hover::before {
+  transform: scaleX(1);
+}
+
+/* ── PHOTO BLOCK ── */
+.gateway__panel-photo {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .gateway__panel-img {
@@ -142,73 +208,84 @@ onMounted(() => {
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.7s ease;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   filter: saturate(0.25) brightness(0.9);
 }
 
 .gateway__panel:hover .gateway__panel-img {
-  transform: scale(1.04);
+  transform: scale(1.05);
   filter: saturate(0.45) brightness(0.95);
 }
 
-.gateway__panel-overlay {
+.gateway__panel-bg-num {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 8, 8, 0.2) 0%,
-    rgba(8, 8, 8, 0.15) 30%,
-    rgba(8, 8, 8, 0.82) 100%
-  );
-  transition: background 0.4s ease;
+  right: 12px;
+  bottom: -20px;
+  font-family: var(--font-display);
+  font-size: 140px;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201, 162, 96, 0.12);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: -webkit-text-stroke 0.5s ease;
 }
 
-.gateway__panel:hover .gateway__panel-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 8, 8, 0.2) 0%,
-    rgba(8, 8, 8, 0.1) 25%,
-    rgba(8, 8, 8, 0.88) 100%
-  );
+.gateway__panel:hover .gateway__panel-bg-num {
+  -webkit-text-stroke: 1px rgba(201, 162, 96, 0.25);
 }
 
-/* gold top border on hover */
-.gateway__panel::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--color-gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
+/* ── TEXT BLOCK ── */
+.gateway__panel-body {
+  background: #0e0e0e;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: none;
+  padding: 36px 40px 40px;
+  flex: 1;
+  transition: border-color 0.3s ease;
 }
 
-.gateway__panel:hover::after {
-  transform: scaleX(1);
+.gateway__panel:hover .gateway__panel-body {
+  border-color: rgba(201, 162, 96, 0.12);
 }
 
-/* ── PANEL CONTENT ── */
-.gateway__panel-content {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 40px;
-  z-index: 2;
+.gateway__panel-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .gateway__panel-num {
-  display: block;
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.2em;
   color: var(--color-gold);
-  margin-bottom: 12px;
+}
+
+.gateway__panel-tag {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 96, 0.65);
+  border: 1px solid rgba(201, 162, 96, 0.2);
+  padding: 3px 10px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.gateway__panel:hover .gateway__panel-tag {
+  border-color: rgba(201, 162, 96, 0.5);
+  color: var(--color-gold);
 }
 
 .gateway__panel-title {
   font-family: var(--font-display);
-  font-size: clamp(26px, 2.4vw, 34px);
+  font-size: clamp(24px, 2.2vw, 32px);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-white);
@@ -221,38 +298,35 @@ onMounted(() => {
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.65;
-  margin-bottom: 20px;
-  max-width: 380px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
+  margin-bottom: 24px;
 }
 
 .gateway__panel-list {
   list-style: none;
   padding: 0;
   margin: 0 0 28px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
 }
 
 .gateway__panel-list li {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 400;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.gateway__panel-dot {
-  width: 4px;
-  height: 4px;
-  background: var(--color-gold);
-  opacity: 0.6;
+.gateway__panel-icon {
+  color: var(--color-gold);
+  opacity: 0.8;
   flex-shrink: 0;
 }
 
@@ -261,19 +335,20 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold);
-  border-bottom: 1px solid rgba(201, 162, 96, 0.3);
-  padding-bottom: 4px;
-  transition: border-color 0.2s, gap 0.2s;
+  padding: 10px 20px;
+  border: 1px solid rgba(201, 162, 96, 0.3);
+  transition: background 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
 }
 
 .gateway__panel:hover .gateway__panel-cta {
-  border-color: var(--color-gold);
-  gap: 14px;
+  background: rgba(201, 162, 96, 0.07);
+  border-color: rgba(201, 162, 96, 0.6);
+  gap: 16px;
 }
 
 /* ── REVEAL ── */
@@ -292,18 +367,19 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
-  .gateway {
-    padding: 80px 0;
-  }
+  .gateway { padding: 80px 0; }
+
   .gateway__panels {
     grid-template-columns: 1fr;
     padding: 0 24px;
   }
-  .gateway__panel {
-    height: 440px;
-  }
-  .gateway__header {
-    margin-bottom: 48px;
-  }
+
+  .gateway__panel-photo { height: 240px; }
+
+  .gateway__panel-body { padding: 28px 24px 32px; }
+
+  .gateway__panel-list { grid-template-columns: 1fr; }
+
+  .gateway__header { margin-bottom: 56px; }
 }
 </style>

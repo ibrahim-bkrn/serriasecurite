@@ -201,6 +201,10 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .client-logo:first-child {
+    grid-column: 1 / -1;
+  }
+
   .client-logo {
     padding: 24px 16px;
   }

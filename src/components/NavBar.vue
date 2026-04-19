@@ -9,76 +9,49 @@
         <li><router-link to="/">Accueil</router-link></li>
 
         <!-- Dropdown Solutions -->
-        <li class="navbar__item--dropdown" :class="{ 'navbar__item--open': solutionsOpen }">
+        <li
+          class="navbar__item--dropdown"
+          :class="{ 'navbar__item--open': solutionsOpen }"
+          @mouseenter="solutionsOpen = true"
+          @mouseleave="solutionsOpen = false"
+        >
           <button class="navbar__dropdown-trigger" @click="toggleSolutions">
             Solutions
             <svg class="navbar__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div class="navbar__dropdown">
-            <div class="navbar__dropdown-inner">
-              <router-link to="/solutions/surveillance-humaine" class="navbar__dropdown-item" @click="closeAll">
-                <div class="navbar__dropdown-item-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <div>
-                  <span class="navbar__dropdown-item-title">Surveillance humaine</span>
-                  <span class="navbar__dropdown-item-sub">Agents CNAPS · Gardiennage · Rondes</span>
-                </div>
-              </router-link>
-              <router-link to="/solutions/surveillance-materielle" class="navbar__dropdown-item" @click="closeAll">
-                <div class="navbar__dropdown-item-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <div>
-                  <span class="navbar__dropdown-item-title">Surveillance matérielle</span>
-                  <span class="navbar__dropdown-item-sub">Alarme AJAX · Vidéosurveillance · Anti-squat</span>
-                </div>
-              </router-link>
+          <Transition name="nav-dropdown">
+            <div v-show="solutionsOpen" class="navbar__dropdown">
+              <div class="navbar__dropdown-inner">
+                <router-link to="/solutions/surveillance-humaine" class="navbar__dropdown-item" @click="closeAll">
+                  <div class="navbar__dropdown-item-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="navbar__dropdown-item-title">Surveillance humaine</span>
+                    <span class="navbar__dropdown-item-sub">Agents CNAPS · Gardiennage · Rondes</span>
+                  </div>
+                </router-link>
+                <router-link to="/solutions/surveillance-materielle" class="navbar__dropdown-item" @click="closeAll">
+                  <div class="navbar__dropdown-item-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="navbar__dropdown-item-title">Surveillance matérielle</span>
+                    <span class="navbar__dropdown-item-sub">Alarme AJAX · Vidéosurveillance · Anti-squat</span>
+                  </div>
+                </router-link>
+              </div>
             </div>
-          </div>
+          </Transition>
         </li>
 
-        <!-- Dropdown Secteurs -->
-        <li class="navbar__item--dropdown" :class="{ 'navbar__item--open': secteursOpen }">
-          <button class="navbar__dropdown-trigger" @click="toggleSecteurs">
-            Secteurs
-            <svg class="navbar__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <div class="navbar__dropdown">
-            <div class="navbar__dropdown-inner">
-              <router-link to="/secteurs/chantiers" class="navbar__dropdown-item" @click="closeAll">
-                <div class="navbar__dropdown-item-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M13 2.05V4h4v2h-1v14H8V6H7V4h4V2.05c-3.95.49-7 3.85-7 7.95 0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.1-3.05-7.46-7-7.95z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <div>
-                  <span class="navbar__dropdown-item-title">Chantiers BTP</span>
-                  <span class="navbar__dropdown-item-sub">Vols, squats, vandalisme</span>
-                </div>
-              </router-link>
-              <router-link to="/secteurs/biens-vacants" class="navbar__dropdown-item" @click="closeAll">
-                <div class="navbar__dropdown-item-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <div>
-                  <span class="navbar__dropdown-item-title">Biens vacants</span>
-                  <span class="navbar__dropdown-item-sub">Propriétés, locaux, entrepôts</span>
-                </div>
-              </router-link>
-            </div>
-          </div>
-        </li>
+        <li><router-link to="/secteurs">Secteurs</router-link></li>
 
         <li><router-link to="/contact">Contact</router-link></li>
       </ul>
@@ -140,26 +113,10 @@
           </div>
         </div>
 
-        <!-- Secteurs accordéon -->
         <div class="mobile-overlay__item" style="--delay: 0.15s">
-          <button
-            class="mobile-overlay__link mobile-overlay__trigger"
-            :class="{ 'mobile-overlay__trigger--open': secteursOpen }"
-            @click="toggleSecteurs"
-          >
+          <router-link to="/secteurs" class="mobile-overlay__link" @click="closeAll">
             Secteurs
-            <svg class="mobile-overlay__chevron" width="14" height="14" viewBox="0 0 12 12" fill="none">
-              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <div class="mobile-overlay__sub" :class="{ 'mobile-overlay__sub--open': secteursOpen }">
-            <router-link to="/secteurs/chantiers" class="mobile-overlay__sub-link" @click="closeAll">
-              Chantiers BTP
-            </router-link>
-            <router-link to="/secteurs/biens-vacants" class="mobile-overlay__sub-link" @click="closeAll">
-              Biens vacants
-            </router-link>
-          </div>
+          </router-link>
         </div>
 
         <div class="mobile-overlay__item" style="--delay: 0.2s">
@@ -210,10 +167,6 @@ function toggleSolutions() {
   secteursOpen.value  = false
 }
 
-function toggleSecteurs() {
-  secteursOpen.value  = !secteursOpen.value
-  solutionsOpen.value = false
-}
 
 function closeAll() {
   menuOpen.value      = false
@@ -337,16 +290,14 @@ onUnmounted(() => {
 
 .navbar__dropdown {
   position: absolute;
-  top: calc(100% + 20px);
+  top: calc(100% + 16px);
   left: 50%;
-  transform: translateX(-50%) translateY(-6px);
+  transform: translateX(-50%);
   background: var(--color-bg-2);
   border: 1px solid var(--color-border);
   min-width: 300px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 100;
+  transform-origin: top center;
 }
 
 .navbar__dropdown::before {
@@ -362,10 +313,22 @@ onUnmounted(() => {
   border-top: 1px solid var(--color-border);
 }
 
-.navbar__item--open .navbar__dropdown {
+/* ── Vue Transition: nav-dropdown ── */
+.nav-dropdown-enter-active {
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-dropdown-leave-active {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.nav-dropdown-enter-from,
+.nav-dropdown-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) scaleY(0.94) translateY(-6px);
+}
+.nav-dropdown-enter-to,
+.nav-dropdown-leave-from {
   opacity: 1;
-  pointer-events: all;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) scaleY(1) translateY(0);
 }
 
 .navbar__dropdown-inner {
@@ -431,9 +394,9 @@ onUnmounted(() => {
   background: rgba(8, 8, 8, 0.92);
   color: var(--color-gold);
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
@@ -445,8 +408,6 @@ onUnmounted(() => {
   padding-right: 3.3em;
   position: relative;
   overflow: hidden;
-  border-radius: 0.9em;
-  box-shadow: inset 0 0 1.6em -0.6em rgba(201, 162, 96, 0.25);
 }
 
 .btn-gold__text {
@@ -471,8 +432,6 @@ onUnmounted(() => {
   justify-content: center;
   height: 2.2em;
   width: 2.2em;
-  border-radius: 0.7em;
-  box-shadow: 0.1em 0.1em 0.6em 0.2em rgba(201, 162, 96, 0.2);
   transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 2;
 }
