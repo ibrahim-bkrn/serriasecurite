@@ -19,18 +19,18 @@
       <!-- ── Colonne gauche : infos ── -->
       <div class="cp-left">
         <div class="cp-left__content">
-          <nav class="cp-breadcrumb">
+          <nav class="cp-breadcrumb cp-anim cp-anim-1">
             <router-link to="/">Accueil</router-link>
             <span>/</span>
             <span class="cp-breadcrumb__active">Contact</span>
           </nav>
 
-          <p class="cp-label">Parlons de votre projet</p>
-          <h1 class="cp-title">
+          <p class="cp-label cp-anim cp-anim-2">Parlons de votre projet</p>
+          <h1 class="cp-title cp-anim cp-anim-3">
             Sécurisons<br />
             <span class="cp-title-stroke">votre bien.</span>
           </h1>
-          <p class="cp-sub">
+          <p class="cp-sub cp-anim cp-anim-4">
             Décrivez votre besoin, nous revenons vers vous avec
             une solution adaptée à votre site et votre budget.
           </p>
@@ -47,7 +47,7 @@
         </div>-->
 
         <!-- 3 blocs info sur la même ligne -->
-        <div class="cp-info-row">
+        <div class="cp-info-row cp-anim cp-anim-5">
           <div v-for="card in infoCards" :key="card.title" class="cp-info-card">
             <div class="cp-info-card__icon"><component :is="card.icon" /></div>
             <h3 class="cp-info-card__title">{{ card.title }}</h3>
@@ -60,11 +60,11 @@
 
       <!-- ── Colonne droite : formulaire ── -->
       <div class="cp-right" id="formulaire">
-        <p class="cp-label">Formulaire de contact</p>
-        <h2 class="cp-form-title">ENVOYEZ-NOUS<br />UN MESSAGE</h2>
-        <p class="cp-form-sub">Nous vous répondons sous 24h, du lundi au dimanche.</p>
+        <p class="cp-label cp-anim cp-anim-2">Formulaire de contact</p>
+        <h2 class="cp-form-title cp-anim cp-anim-3">ENVOYEZ-NOUS<br />UN MESSAGE</h2>
+        <p class="cp-form-sub cp-anim cp-anim-4">Nous vous répondons sous 24h, du lundi au dimanche.</p>
 
-        <form class="cp-form" @submit.prevent="submitForm" novalidate>
+        <form class="cp-form cp-anim cp-anim-5" @submit.prevent="submitForm" novalidate>
 
           <div class="cp-form__row">
             <div class="cp-form__field" :class="{ 'cp-form__field--error': errors.nom }">
@@ -213,6 +213,18 @@ function submitForm() {
   display: flex;
   flex-direction: column;
 }
+
+@keyframes cpFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cp-anim   { animation: cpFadeUp 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+.cp-anim-1 { animation-delay: 0.05s; }
+.cp-anim-2 { animation-delay: 0.12s; }
+.cp-anim-3 { animation-delay: 0.2s;  }
+.cp-anim-4 { animation-delay: 0.28s; }
+.cp-anim-5 { animation-delay: 0.36s; }
 
 /* ── Mini nav ── */
 .cp-nav {

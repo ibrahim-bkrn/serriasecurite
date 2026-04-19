@@ -151,6 +151,22 @@ const menuOpen      = ref(false)
 const solutionsOpen = ref(false)
 const secteursOpen  = ref(false)
 
+let savedScroll = 0
+
+function lockScroll() {
+  savedScroll = window.scrollY
+  document.body.style.position = 'fixed'
+  document.body.style.top      = `-${savedScroll}px`
+  document.body.style.width    = '100%'
+}
+
+function unlockScroll(restorePosition = true) {
+  document.body.style.position = ''
+  document.body.style.top      = ''
+  document.body.style.width    = ''
+  window.scrollTo(0, restorePosition ? savedScroll : 0)
+}
+
 function onScroll() {
   isScrolled.value = window.scrollY > 80
 }
@@ -159,7 +175,8 @@ function toggleMenu() {
   menuOpen.value = !menuOpen.value
   solutionsOpen.value = false
   secteursOpen.value  = false
-  document.body.style.overflow = menuOpen.value ? 'hidden' : ''
+  if (menuOpen.value) lockScroll()
+  else unlockScroll(true)
 }
 
 function toggleSolutions() {
@@ -167,12 +184,11 @@ function toggleSolutions() {
   secteursOpen.value  = false
 }
 
-
 function closeAll() {
   menuOpen.value      = false
   solutionsOpen.value = false
   secteursOpen.value  = false
-  document.body.style.overflow = ''
+  unlockScroll(false)
 }
 
 function onClickOutside(e) {
@@ -190,7 +206,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
   document.removeEventListener('click', onClickOutside)
-  document.body.style.overflow = ''
+  unlockScroll(false)
 })
 </script>
 

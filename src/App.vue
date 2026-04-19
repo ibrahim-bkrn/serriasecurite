@@ -3,6 +3,28 @@
 </template>
 
 <script setup>
+import { watch, nextTick } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+function triggerViewportReveals() {
+  nextTick(() => {
+    setTimeout(() => {
+      const els = [...document.querySelectorAll('.reveal:not(.visible)')]
+        .filter(el => el.getBoundingClientRect().top < window.innerHeight)
+      els.forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 40)
+      })
+    }, 120)
+  })
+}
+
+watch(() => route.path, () => {
+  document.body.style.overflow = ''
+  window.scrollTo(0, 0)
+  triggerViewportReveals()
+}, { immediate: true })
 </script>
 
 <style>
@@ -61,4 +83,5 @@ body {
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
 .reveal-delay-6 { transition-delay: 0.6s; }
+
 </style>

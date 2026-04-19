@@ -82,6 +82,7 @@ const services = [
   border-right: 1px solid rgba(201, 162, 96, 0.1);
   position: relative;
   background: var(--color-bg);
+  animation: heroSlideLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .hero__left::before {
@@ -217,6 +218,7 @@ const services = [
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   overflow: hidden;
+  animation: heroSlideRight 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .hero__cell {
@@ -291,6 +293,31 @@ const services = [
   text-transform: uppercase;
   color: #ffffff;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Animations ── */
+@keyframes heroSlideLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes heroSlideRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero__title  { animation: fadeUp 0.6s 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+.hero__intro  { animation: fadeUp 0.6s 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+.hero__cta    { animation: fadeUp 0.6s 0.4s  cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+
+@media (max-width: 900px) {
+  .hero__left  { animation-name: fadeUp; }
+  .hero__grid  { animation-name: fadeUp; animation-delay: 0.15s; }
 }
 
 @media (max-width: 900px) {
