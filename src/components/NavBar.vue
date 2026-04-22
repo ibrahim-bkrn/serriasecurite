@@ -26,26 +26,40 @@
               <div class="navbar__dropdown-inner">
                 <router-link to="/solutions/surveillance-humaine" class="navbar__dropdown-item" @click="closeAll">
                   <div class="navbar__dropdown-item-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" fill="currentColor"/>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
                     </svg>
                   </div>
-                  <div>
+                  <div class="navbar__dropdown-item-text">
                     <span class="navbar__dropdown-item-title">Surveillance humaine</span>
                     <span class="navbar__dropdown-item-sub">Agents CNAPS · Gardiennage · Rondes</span>
                   </div>
                 </router-link>
                 <router-link to="/solutions/surveillance-materielle" class="navbar__dropdown-item" @click="closeAll">
                   <div class="navbar__dropdown-item-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="currentColor"/>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                   </div>
-                  <div>
+                  <div class="navbar__dropdown-item-text">
                     <span class="navbar__dropdown-item-title">Surveillance matérielle</span>
-                    <span class="navbar__dropdown-item-sub">Alarme AJAX · Vidéosurveillance · Anti-squat</span>
+                    <span class="navbar__dropdown-item-sub">Alarme AJAX · Vidéosurveillance</span>
                   </div>
                 </router-link>
+                <div class="navbar__dropdown-item navbar__dropdown-item--soon">
+                  <div class="navbar__dropdown-item-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </div>
+                  <div class="navbar__dropdown-item-text">
+                    <span class="navbar__dropdown-item-title">
+                      Protection physique
+                      <span class="navbar__dropdown-soon-badge">Bientôt</span>
+                    </span>
+                    <span class="navbar__dropdown-item-sub">Portes anti-squat · Sécurisation</span>
+                  </div>
+                </div>
               </div>
             </div>
           </Transition>
@@ -110,6 +124,9 @@
             <router-link to="/solutions/surveillance-materielle" class="mobile-overlay__sub-link" @click="closeAll">
               Surveillance matérielle
             </router-link>
+            <span class="mobile-overlay__sub-link mobile-overlay__sub-link--soon">
+              Protection physique <span class="mobile-overlay__soon-badge">Bientôt</span>
+            </span>
           </div>
         </div>
 
@@ -323,7 +340,7 @@ onUnmounted(() => {
   transform: translateX(-50%);
   background: var(--color-bg-2);
   border: 1px solid var(--color-border);
-  min-width: 300px;
+  min-width: 360px;
   z-index: 100;
   transform-origin: top center;
 }
@@ -360,55 +377,100 @@ onUnmounted(() => {
 }
 
 .navbar__dropdown-inner {
-  padding: 8px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
+}
+
+.navbar__dropdown-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 96, 0.5);
+  padding: 0 4px 10px;
+  margin: 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 6px;
 }
 
 .navbar__dropdown-item {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 14px;
+  padding: 10px 10px;
   text-decoration: none;
-  border: 1px solid transparent;
+  border-left: 2px solid transparent;
   transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
 }
 
-.navbar__dropdown-item:hover {
+a.navbar__dropdown-item:hover {
   background: rgba(201, 162, 96, 0.05);
-  border-color: var(--color-border);
+  border-left-color: var(--color-gold);
 }
 
 .navbar__dropdown-item-icon {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(201, 162, 96, 0.08);
+  background: rgba(201, 162, 96, 0.07);
   border: 1px solid rgba(201, 162, 96, 0.15);
   color: var(--color-gold);
   flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+a.navbar__dropdown-item:hover .navbar__dropdown-item-icon {
+  background: rgba(201, 162, 96, 0.14);
+  border-color: rgba(201, 162, 96, 0.35);
+}
+
+.navbar__dropdown-item-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .navbar__dropdown-item-title {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
   color: var(--color-white);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .navbar__dropdown-item-sub {
   display: block;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 300;
   color: var(--color-muted);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
+}
+
+
+.navbar__dropdown-item--soon {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.navbar__dropdown-soon-badge {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid rgba(201, 162, 96, 0.4);
+  padding: 1px 6px;
+  line-height: 1.6;
 }
 
 /* ── CTA BUTTON ── */
@@ -617,6 +679,25 @@ onUnmounted(() => {
 .mobile-overlay__sub-link:hover {
   color: var(--color-gold);
   border-left-color: var(--color-gold);
+}
+
+.mobile-overlay__sub-link--soon {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-overlay__soon-badge {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid rgba(201, 162, 96, 0.4);
+  padding: 1px 6px;
 }
 
 /* Footer CTA */

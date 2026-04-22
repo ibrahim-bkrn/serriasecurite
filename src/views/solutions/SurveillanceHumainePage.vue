@@ -14,7 +14,7 @@
           Surveillance<br />
           <span class="sh-hero__title-stroke">Humaine</span>
         </h1>
-        <p class="sh-hero__label">Gardiennage humain | Rondes | Interventions sur alarme</p>
+        <p class="sh-hero__label">Gardiennage humain • Rondes • Interventions sur alarme</p>
         <p class="sh-hero__sub">
           Des agents certifiés CNAPS, déployés en 24h sur toute l'Île-de-France.
           Prévenir les risques. Protéger vos biens. Agir immédiatement.
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="sh-hero__right">
-        <img :src="heroImg" alt="Agent de sécurité Sierra Sécurité" class="sh-hero__img" />
+        <img :src="heroAgent" alt="Agent de sécurité Sierra Sécurité" class="sh-hero__img" />
         <div class="sh-hero__img-overlay"></div>
         <div class="sh-hero__stat-card">
           <span class="sh-hero__stat-num">24h</span>
@@ -52,10 +52,6 @@
             Nos agents assurent une prévention active, une dissuasion visible
             et une capacité d'intervention immédiate.
           </p>
-          <div class="sh-why__callout">
-            <div class="sh-why__callout-line"></div>
-            <p>Surveillance crédible, effet dissuasif fort et tranquillité immédiate — même en contexte tendu.</p>
-          </div>
           <router-link to="/contact" class="sh-cta-primary">
             <span>Parlons-en plus en détails</span>
             <div class="sh-cta-primary__arrow">
@@ -71,14 +67,67 @@
           </p>
           <div
             v-for="(threat, i) in threats"
-            :key="threat"
+            :key="threat.label"
             class="sh-why__threat reveal"
             :class="[`reveal-delay-${i + 1}`, { visible: whyVis }]"
           >
-            <span class="sh-why__threat-dot"></span>
-            <span class="sh-why__threat-text">{{ threat }}</span>
+            <span class="sh-why__threat-icon" v-html="threat.icon"></span>
+            <span class="sh-why__threat-text">{{ threat.label }}</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ── PROFILS AGENTS ── -->
+    <section class="sh-agents" ref="agRef">
+      <div class="sh-agents__header reveal" :class="{ visible: agVis }">
+        <p class="section-label">Nos profils d'agents de sécurité</p>
+        <h2 class="sh-agents__title">3 TYPES D'AGENTS</h2>
+        <p class="sh-agents__sub">Chaque mission bénéficie du profil adapté à votre environnement et vos risques.</p>
+      </div>
+
+      <div class="sh-agents__grid">
+        <div
+          v-for="(agent, i) in agents"
+          :key="agent.title"
+          class="sh-agent-card"
+        >
+          <div class="sh-agent-card__photo">
+            <img :src="agent.img" :alt="agent.title" class="sh-agent-card__img" />
+            <div class="sh-agent-card__photo-overlay"></div>
+            <span class="sh-agent-card__num">{{ String(i + 1).padStart(2, '0') }}</span>
+          </div>
+          <div class="sh-agent-card__body">
+            <span class="sh-agent-card__tag">{{ agent.tag }}</span>
+            <h3 class="sh-agent-card__title">{{ agent.title }}</h3>
+            <div class="sh-agent-card__expandable">
+              <p class="sh-agent-card__desc">{{ agent.desc }}</p>
+              <ul class="sh-agent-card__features">
+                <li v-for="f in agent.features" :key="f">
+                  <span class="sh-agent-card__dot"></span>{{ f }}
+                </li>
+              </ul>
+              <router-link to="/contact" class="sh-agent-card__cta">
+                <span>Parlons de votre site</span>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sh-agents__cta-row reveal reveal-delay-3" :class="{ visible: agVis }">
+        <p class="sh-agents__cta-text">Vous ne savez pas quel profil correspond à votre situation ?</p>
+        <router-link to="/contact" class="sh-cta-primary">
+          <span>On définit ça ensemble</span>
+          <div class="sh-cta-primary__arrow">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </router-link>
       </div>
     </section>
 
@@ -114,58 +163,11 @@
       </div>
     </section>
 
-    <!-- ── PROFILS AGENTS ── -->
-    <section class="sh-agents" ref="agRef">
-      <div class="sh-agents__container">
-        <div class="sh-agents__header">
-          <p class="section-label reveal" :class="{ visible: agVis }">Nos profils d’agents de sécurité</p>
-          <h2 class="section-title reveal reveal-delay-1" :class="{ visible: agVis }">3 TYPES D'AGENTS</h2>
-          <p class="section-sub reveal reveal-delay-2" :class="{ visible: agVis }">
-            Chaque mission bénéficie du profil adapté à votre environnement et vos risques.
-          </p>
-        </div>
-
-        <div class="sh-accordion reveal reveal-delay-2" :class="{ visible: agVis }">
-          <div
-            v-for="(agent, i) in agents"
-            :key="agent.title"
-            class="sh-accordion__item"
-            :class="{ 'sh-accordion__item--open': activeAgent === i }"
-            @click="activeAgent = activeAgent === i ? null : i"
-          >
-            <div class="sh-accordion__header">
-              <span class="sh-accordion__num">{{ String(i + 1).padStart(2, '0') }}</span>
-              <div class="sh-accordion__titles">
-                <span class="sh-accordion__tag">{{ agent.tag }}</span>
-                <h3 class="sh-accordion__title">{{ agent.title }}</h3>
-              </div>
-              <span class="sh-accordion__chevron">
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-                  <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </div>
-            <div class="sh-accordion__body">
-              <div class="sh-accordion__body-inner">
-                <p class="sh-accordion__desc">{{ agent.desc }}</p>
-                <ul class="sh-accordion__features">
-                  <li v-for="f in agent.features" :key="f">
-                    <span class="sh-accordion__dot"></span>{{ f }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ── CROSS-SELL V3 : carte sombre bordée or ── -->
     <section class="cs-v3-wrap" :style="{ backgroundImage: `url(${crossImg})` }">
       <div class="cs-v3">
-        <span class="cs-v3__badge">Solution complémentaire</span>
         <h2 class="cs-v3__title">Et si vous ajoutez à cela<br />une surveillance matérielle ?</h2>
-        <p class="cs-v3__text">Quand la sécurité est fragmentée, les failles apparaissent. SIERRA SÉCURITÉ intègre l’humain et la technologie pour une protection cohérente, réactive et maîtrisée, du terrain au centre de contrôle..</p>
+        <p class="cs-v3__text">Quand la sécurité est fragmentée, les failles apparaissent. SIERRA SÉCURITÉ intègre l'humain et la technologie pour une protection cohérente, réactive et maîtrisée, du terrain au centre de contrôle..</p>
         <router-link to="/solutions/surveillance-materielle" class="cs-v3__cta">
           Protection totale
           <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -213,11 +215,15 @@ import NavBar        from '../../components/NavBar.vue'
 import FooterSection from '../../components/FooterSection.vue'
 import PageCTA       from '../../components/PageCTA.vue'
 
-import heroImg   from '../../assets/photos/gardiennage.jpeg'
-import crossImg  from '../../assets/photos/videosurveillance.jpg'
-import logoFond  from '../../assets/logo/Logo de fond 1.png'
+import crossImg     from '../../assets/photos/videosurveillance.jpg'
+import logoFond     from '../../assets/logo/Logo de fond 1.png'
+import SH1          from '../../assets/photos/SH1.png'
+import agentApsImg  from '../../assets/photos/agent-aps.png'
+import agentCynoImg from '../../assets/photos/agent-cynophile.png'
+import agentMobImg  from '../../assets/photos/agent-mobile.png'
 
-const activeAgent = ref(null)
+import heroAgent from '../../assets/photos/agenthero.png'
+
 
 const engagements = [
   'Réactivité express — mise en place possible en 24h',
@@ -233,6 +239,7 @@ const agents = [
     tag: 'Agent de Prévention & Sécurité',
     title: 'AGENT APS',
     desc: 'Présence dissuasive professionnelle pour le contrôle d\'accès, la surveillance continue et l\'intervention immédiate.',
+    img: agentApsImg,
     features: [
       'Filtrage & contrôle d\'accès',
       'Rondes régulières & surveillance continue',
@@ -245,6 +252,7 @@ const agents = [
     tag: 'Surveillance renforcée',
     title: 'AGENT CYNOPHILE',
     desc: 'Binôme homme-chien pour une détection accrue et une dissuasion maximale, idéal pour les sites à risque ou nocturnes.',
+    img: agentCynoImg,
     features: [
       'Surveillance renforcée via binôme homme/chien',
       'Dissuasion puissante et détection accrue',
@@ -257,6 +265,7 @@ const agents = [
     tag: 'Rondier mobile',
     title: 'AGENT MOBILE',
     desc: 'Rondes planifiées et aléatoires pour les sites étendus ou non permanents, avec intervention sur déclenchement d\'alarme.',
+    img: agentMobImg,
     features: [
       'Rondes planifiées & aléatoires',
       'Présence ponctuelle sur lieux étendus',
@@ -268,11 +277,43 @@ const agents = [
 ]
 
 const threats = [
-  'Intrusions, effractions & vols',
-  'Dégradations, vandalisme, conflits',
-  'Squats ou occupations illégales',
-  'Risques techniques, fuites, incendies',
-  'Troubles dans les établissements publics ou privés',
+  {
+    label: 'Intrusions, effractions & vols',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <path d="M9.5 9a2.5 2.5 0 1 1 5 0v2H9.5V9z"/>
+      <rect x="8" y="11" width="8" height="5" rx="1"/>
+    </svg>`,
+  },
+  {
+    label: 'Dégradations, vandalisme, conflits',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+    </svg>`,
+  },
+  {
+    label: 'Squats ou occupations illégales',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <path d="M9 22V12h6v10"/>
+      <line x1="4" y1="4" x2="20" y2="20"/>
+    </svg>`,
+  },
+  {
+    label: 'Risques techniques, fuites, incendies',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+    </svg>`,
+  },
+  {
+    label: 'Troubles dans les établissements publics ou privés',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>`,
+  },
 ]
 
 const steps = [
@@ -365,8 +406,8 @@ onMounted(() => {
 
 .sh-hero__label {
   font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--color-gold);
@@ -391,11 +432,11 @@ onMounted(() => {
 
 .sh-hero__sub {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
-  max-width: 460px;
+  max-width: 550px;
   margin-bottom: 28px;
 }
 
@@ -479,7 +520,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   display: block;
   filter: saturate(0.4) brightness(0.9);
 }
@@ -594,37 +635,14 @@ onMounted(() => {
 
 .sh-why__intro {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.8;
-  max-width: 440px;
+  max-width: 500px;
   margin-bottom: 25px;
 }
 
-.sh-why__callout {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.sh-why__callout-line {
-  width: 2px;
-  min-height: 52px;
-  background: var(--color-gold);
-  flex-shrink: 0;
-  opacity: 0.6;
-}
-
-.sh-why__callout p {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--color-text);
-  line-height: 1.7;
-  font-style: italic;
-}
 
 .sh-why__right {
   display: flex;
@@ -651,16 +669,17 @@ onMounted(() => {
 
 .sh-why__threat:first-child { border-top: 1px solid var(--color-border); }
 
-.sh-why__threat-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--color-gold);
+.sh-why__threat-icon {
+  color: var(--color-gold);
   flex-shrink: 0;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
 }
 
 .sh-why__threat-text {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 400;
   color: var(--color-text);
   letter-spacing: 0.01em;
@@ -669,17 +688,199 @@ onMounted(() => {
 /* ── AGENTS ── */
 .sh-agents {
   background: var(--color-bg);
-  padding: 120px 0;
-}
-
-.sh-agents__container {
-  max-width: 70%;
-  margin: 0 auto;
-  padding: 0 80px;
+  padding: 120px 0 0;
 }
 
 .sh-agents__header {
-  margin-bottom: 80px;
+  max-width: 1280px;
+  margin: 0 auto 72px;
+  padding: 0 80px;
+}
+
+.sh-agents__title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin: 12px 0 20px;
+}
+
+.sh-agents__sub {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--color-muted);
+  max-width: 800px;
+  line-height: 1.7;
+}
+
+/* ── AGENT CARDS GRID ── */
+.sh-agents__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 80%;
+  margin: 0 auto;
+  gap: 12px;
+}
+
+.sh-agent-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  border-right: 1px solid rgba(201, 162, 96, 0.12);
+}
+
+.sh-agent-card { border-right: none; }
+
+/* ── PHOTO ZONE ── */
+.sh-agent-card__photo {
+  height: 50vh;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px 4px 0 0;
+}
+
+.sh-agent-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: saturate(0.25) brightness(0.8);
+  transition: transform 0.7s ease, filter 0.5s ease;
+}
+
+
+.sh-agent-card__photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.05) 0%, rgba(8,8,8,0.5) 100%);
+}
+
+.sh-agent-card__num {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-gold);
+  opacity: 0.7;
+}
+
+/* ── TEXT ZONE ── */
+.sh-agent-card__body {
+  flex-shrink: 0;
+  background: var(--color-bg-2);
+  border-top: 1px solid rgba(201, 162, 96, 0.15);
+  padding: 28px 32px 32px;
+}
+
+.sh-agent-card__tag {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+.sh-agent-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-white);
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sh-agent-card__title {
+  white-space: normal;
+}
+
+.sh-agent-card__desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--color-muted);
+  line-height: 1.75;
+  margin-top: 18px;
+  margin-bottom: 22px;
+}
+
+.sh-agent-card__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 28px;
+}
+
+.sh-agent-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.sh-agent-card__dot {
+  width: 5px;
+  height: 5px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.sh-agent-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+
+.sh-agent-card__cta:hover { gap: 16px; }
+
+/* ── AGENTS CTA ROW ── */
+.sh-agents__cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 80px;
+  border-top: 1px solid var(--color-border);
+}
+
+.sh-agents__cta-text {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--color-muted);
+  line-height: 1.6;
 }
 
 .section-label {
@@ -705,131 +906,13 @@ onMounted(() => {
 
 .section-sub {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 300;
   color: var(--color-muted);
-  max-width: 480px;
+  max-width: 800px;
   line-height: 1.7;
 }
 
-.sh-accordion {
-  border-top: 1px solid var(--color-border);
-}
-
-.sh-accordion__item {
-  border-bottom: 1px solid var(--color-border);
-  cursor: pointer;
-  transition: border-color 0.3s;
-}
-
-
-.sh-accordion__header {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  padding: 28px 0;
-  user-select: none;
-}
-
-.sh-accordion__num {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--color-gold);
-  opacity: 0.5;
-  letter-spacing: 0.08em;
-  flex-shrink: 0;
-  transition: opacity 0.3s;
-}
-
-.sh-accordion__item--open .sh-accordion__num { opacity: 1; }
-
-.sh-accordion__titles {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.sh-accordion__tag {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  opacity: 0.7;
-}
-
-.sh-accordion__title {
-  font-family: var(--font-display);
-  font-size: clamp(20px, 2.5vw, 28px);
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--color-white);
-  letter-spacing: 0.03em;
-  line-height: 1;
-  transition: color 0.3s;
-}
-
-.sh-accordion__chevron {
-  color: var(--color-gold);
-  opacity: 0.5;
-  transition: transform 0.35s ease, opacity 0.3s;
-  flex-shrink: 0;
-}
-
-.sh-accordion__item--open .sh-accordion__chevron {
-  transform: rotate(180deg);
-  opacity: 1;
-}
-
-.sh-accordion__body {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s ease;
-  overflow: hidden;
-}
-
-.sh-accordion__item--open .sh-accordion__body {
-  grid-template-rows: 1fr;
-}
-
-.sh-accordion__body-inner {
-  overflow: hidden;
-}
-
-.sh-accordion__desc {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--color-muted);
-  line-height: 1.7;
-  padding-bottom: 20px;
-  max-width: 600px;
-}
-
-.sh-accordion__features {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 32px;
-  padding-bottom: 32px;
-}
-
-.sh-accordion__features li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--color-text);
-}
-
-.sh-accordion__dot {
-  width: 5px;
-  height: 5px;
-  background: var(--color-gold);
-  flex-shrink: 0;
-}
 
 /* ── MÉTHODE ── */
 .sh-method {
@@ -872,7 +955,7 @@ onMounted(() => {
 .sh-method__intro {
   margin-top: 20px;
   color: var(--color-text-muted);
-  font-size: 1rem;
+  font-size: 1.15rem;
   line-height: 1.7;
   max-width: 680px;
 }
@@ -905,7 +988,7 @@ onMounted(() => {
 
 .sh-step__title {
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--color-white);
   margin-bottom: 10px;
@@ -914,11 +997,11 @@ onMounted(() => {
 
 .sh-step__text {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
-  max-width: 560px;
+  max-width: 680px;
 }
 
 /* ── CROSS-SELL ── */
@@ -997,7 +1080,7 @@ onMounted(() => {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(6, 6, 6, 0.9);
+  background: rgba(6, 6, 6, 0.85);
   z-index: 0;
 }
 
@@ -1010,7 +1093,6 @@ onMounted(() => {
   text-align: center;
   text-decoration: none;
   background: var(--color-bg);
-  border: 1px solid rgba(201, 162, 96, 0.35);
   padding: 56px 80px;
   max-width: 700px;
   width: 100%;
@@ -1151,9 +1233,10 @@ onMounted(() => {
 /* ── RESPONSIVE ── */
 @media (max-width: 1200px) {
   .sh-hero__left { padding: 80px 48px 80px 40px; }
-  .sh-agents__container, .sh-method__container,
-  .sh-statement__container, .sh-engagements__container,
+  .sh-method__container, .sh-engagements__container,
   .sh-why__container { padding: 0 40px; }
+  .sh-agents__header { padding: 0 40px; }
+  .sh-agents__cta-row { padding: 48px 40px; }
   .sh-engagements__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1163,56 +1246,35 @@ onMounted(() => {
   .sh-hero__left::before { display: none; }
   .sh-hero__right { height: 340px; min-height: unset; }
   .sh-hero__stat-card { display: none; }
-  .sh-statement__container { grid-template-columns: 4px 1fr; }
-  .sh-statement__body { grid-column: 2; }
   .sh-why__container { grid-template-columns: 1fr; gap: 48px; }
-  /* cross-sell tablet */
+  .sh-agents__grid { grid-template-columns: 1fr !important; max-width: 100%; }
+  .sh-agent-card { border-right: none; }
+  .sh-agent-card__expandable { max-height: 500px !important; opacity: 1 !important; }
+  .sh-agent-card__title { white-space: normal !important; font-size: clamp(22px, 4vw, 30px) !important; }
   .cs-v3 { padding: 48px 40px; }
-  .cs-v3b__top { padding: 40px; }
-  .cs-v3b__footer { padding: 20px 40px; }
 }
 
 @media (max-width: 768px) {
   .sh-hero__left { padding: 32px 20px 40px; }
   .sh-hero__right { height: 280px; }
-  .sh-agents__container, .sh-method__container,
-  .sh-statement__container, .sh-engagements__container { padding: 0 20px; }
+  .sh-method__container, .sh-engagements__container { padding: 0 20px; }
   .sh-why { padding: 56px 0; }
   .sh-why__container { padding: 0 20px; }
-  .sh-agents { padding: 56px 0; }
+  .sh-agents { padding: 56px 0 0; }
+  .sh-agents__header { padding: 0 20px; margin-bottom: 48px; }
+  .sh-agents__cta-row { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
   .sh-method { padding: 56px 0; }
   .sh-engagements { padding: 56px 0; }
   .sh-engagements__grid { grid-template-columns: 1fr; }
-  .sh-statement { padding: 56px 0; }
-  .sh-statement__container { grid-template-columns: 1fr; gap: 32px; }
-  .sh-statement__line { display: none; }
   .sh-step { grid-template-columns: 64px 1fr; gap: 16px; padding: 24px 0; }
   .sh-step__num { font-size: 36px; }
-
-  /* method header : logo caché, texte pleine largeur */
   .sh-method__header { flex-direction: column; gap: 0; }
   .sh-method__header-logo { display: none; }
-
   .sh-hero__img { filter: saturate(0.6) brightness(1.05); }
   .sh-hero__img-overlay { background: linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.15) 100%); }
   .sh-hero__actions { flex-direction: column; }
   .sh-cta-primary, .sh-cta-secondary { justify-content: center; }
-
-  /* accordion mobile */
-  .sh-agents__container {max-width: 100%;}
-  .sh-agents__header { margin-bottom: 40px; }
-  .sh-accordion__header { gap: 14px; padding: 18px 0; }
-  .sh-accordion__num { font-size: 11px; }
-  .sh-accordion__title { font-size: 17px; }
-  .sh-accordion__tag { font-size: 9px; }
-  .sh-accordion__desc { max-width: 100%; }
-  .sh-accordion__features { gap: 8px 12px; }
-
-  /* cross-sell mobile */
   .cs-v3-wrap { padding: 80px 20px; }
   .cs-v3 { padding: 32px 20px; }
-  .cs-v3b-wrap { padding: 40px 20px; }
-  .cs-v3b__top { padding: 32px 20px; }
-  .cs-v3b__footer { padding: 16px 20px; }
 }
 </style>
