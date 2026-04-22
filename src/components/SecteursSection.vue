@@ -1,94 +1,139 @@
 <template>
   <section class="secteurs" ref="sectionRef">
-    <div class="secteurs__container">
-      <div class="secteurs__header">
-        <p class="section-label reveal" :class="{ visible: visible }">Domaines</p>
-        <h2 class="section-title reveal reveal-delay-1" :class="{ visible: visible }">
-          NOS DOMAINES D'INTERVENTION
-        </h2>
-        <p class="section-subtitle reveal reveal-delay-2" :class="{ visible: visible }">
-          Nous adaptons nos dispositifs à chaque environnement
-        </p>
-      </div>
 
-      <div class="secteurs__list">
-        <div
-          v-for="(secteur, i) in secteurs"
-          :key="secteur.name"
-          class="secteur-item reveal"
-          :class="[`reveal-delay-${i + 1}`, { visible: itemsVisible }]"
-        >
-          <div class="secteur-item__inner">
-            <span class="secteur-item__icon" v-html="secteur.icon"></span>
-            <span class="secteur-item__name">{{ secteur.name }}</span>
+    <div class="secteurs__header reveal" :class="{ visible: visible }">
+      <p class="section-label">Domaines</p>
+      <h2 class="section-title">NOS DOMAINES D'INTERVENTION</h2>
+      <p class="section-subtitle">Nous adaptons nos dispositifs à chaque environnement</p>
+    </div>
+
+    <div class="secteurs__carousel-wrap">
+      <div class="secteurs__viewport" ref="viewportRef">
+        <div class="secteurs__track" :style="trackStyle">
+          <div
+            v-for="(secteur, i) in secteurs"
+            :key="secteur.name"
+            class="secteur-card"
+            :style="{ width: cardWidth + 'px' }"
+          >
+            <img :src="secteur.img" :alt="secteur.name" class="secteur-card__img" />
+            <div class="secteur-card__overlay"></div>
+            <div class="secteur-card__content">
+              <span class="secteur-card__num">0{{ i + 1 }}</span>
+              <h3 class="secteur-card__title">{{ secteur.name }}</h3>
+            </div>
           </div>
-          <div class="secteur-item__sep" v-if="i < secteurs.length - 1"></div>
         </div>
       </div>
+
+      <button class="secteurs__arrow secteurs__arrow--prev" :class="{ disabled: !canPrev }" @click="prev" aria-label="Précédent">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <path d="M16 10H4M9 5l-5 5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="secteurs__arrow secteurs__arrow--next" :class="{ disabled: !canNext }" @click="next" aria-label="Suivant">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
+
+    <div class="secteurs__dots">
+      <button
+        v-for="(_, i) in secteurs"
+        :key="i"
+        class="secteurs__dot"
+        :class="{ active: current === i }"
+        @click="current = i"
+        :aria-label="`Slide ${i + 1}`"
+      />
+    </div>
+
+    <div class="secteurs__cta reveal" :class="{ visible: visible }">
+      <router-link to="/secteurs" class="secteurs__btn">
+        <span>Secteurs d'intervention</span>
+        <div class="secteurs__btn-arrow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </router-link>
+    </div>
+
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-const sectionRef = ref(null)
-const visible = ref(false)
-const itemsVisible = ref(false)
+import gardiennageImg  from '../assets/photos/gardiennage3.jpeg'
+import porteImg        from '../assets/photos/porte-antisquat2.jpeg'
+import surveillanceImg from '../assets/photos/surveillance2.jpeg'
+import identiteImg     from '../assets/photos/identite.jpeg'
+import gardiennage2Img from '../assets/photos/gardiennage2.jpeg'
+
+const sectionRef    = ref(null)
+const viewportRef   = ref(null)
+const visible       = ref(false)
+const current       = ref(0)
+const cardWidth     = ref(380)
+const visibleCount  = ref(3)
+const gap           = 12
 
 const secteurs = [
-  {
-    name: 'Chantiers',
-    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M2 20h20M4 20V10l8-6 8 6v10M10 20v-6h4v6"/>
-    </svg>`,
-  },
-  {
-    name: 'Biens vacants inoccupés',
-    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="1"/>
-      <path d="M3 9h18M9 21V9"/>
-    </svg>`,
-  },
-  {
-    name: 'Commerces de proximité',
-    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 3h18l-2 9H5L3 3z"/>
-      <path d="M5 12v9h14v-9"/>
-      <path d="M10 12v9M14 12v9"/>
-    </svg>`,
-  },
-  {
-    name: 'Maisons & Appartements',
-    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 12l9-9 9 9M5 10v10h4v-6h6v6h4V10"/>
-    </svg>`,
-  },
-  {
-    name: 'Échafaudages',
-    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="5" y1="3" x2="5" y2="21"/>
-      <line x1="19" y1="3" x2="19" y2="21"/>
-      <line x1="5" y1="7" x2="19" y2="7"/>
-      <line x1="5" y1="12" x2="19" y2="12"/>
-      <line x1="5" y1="17" x2="19" y2="17"/>
-    </svg>`,
-  },
+  { name: 'Chantiers',               img: gardiennageImg  },
+  { name: 'Biens vacants inoccupés', img: porteImg        },
+  { name: 'Commerces de proximité',  img: gardiennage2Img },
+  { name: 'Maisons & Appartements',  img: identiteImg     },
+  { name: 'Échafaudages',            img: surveillanceImg },
 ]
 
+const maxIndex = computed(() => secteurs.length - visibleCount.value)
+const canPrev  = computed(() => current.value > 0)
+const canNext  = computed(() => current.value < maxIndex.value)
+
+const trackStyle = computed(() => ({
+  transform: `translateX(-${current.value * (cardWidth.value + gap)}px)`,
+}))
+
+function prev() {
+  if (canPrev.value) current.value--
+}
+
+function next() {
+  if (canNext.value) current.value++
+}
+
+function updateLayout() {
+  if (!viewportRef.value) return
+  const vw = viewportRef.value.offsetWidth
+  const ww = window.innerWidth
+  if (ww >= 1100) {
+    visibleCount.value = 3
+    cardWidth.value = Math.floor((vw - gap * 2) / 3)
+  } else if (ww >= 640) {
+    visibleCount.value = 2
+    cardWidth.value = Math.floor((vw - gap) / 2)
+  } else {
+    visibleCount.value = 1
+    cardWidth.value = vw
+  }
+  current.value = Math.min(current.value, maxIndex.value)
+}
+
 onMounted(() => {
-  const headerObs = new IntersectionObserver(
-    ([e]) => { if (e.isIntersecting) { visible.value = true; headerObs.disconnect() } },
-    { threshold: 0.2 }
-  )
-  const itemsObs = new IntersectionObserver(
-    ([e]) => { if (e.isIntersecting) { itemsVisible.value = true; itemsObs.disconnect() } },
+  updateLayout()
+  window.addEventListener('resize', updateLayout)
+
+  const obs = new IntersectionObserver(
+    ([e]) => { if (e.isIntersecting) { visible.value = true; obs.disconnect() } },
     { threshold: 0.15 }
   )
-  if (sectionRef.value) {
-    headerObs.observe(sectionRef.value)
-    itemsObs.observe(sectionRef.value)
-  }
+  if (sectionRef.value) obs.observe(sectionRef.value)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateLayout)
 })
 </script>
 
@@ -100,14 +145,11 @@ onMounted(() => {
   border-bottom: 1px solid var(--color-border);
 }
 
-.secteurs__container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 80px;
-}
-
+/* ── HEADER ── */
 .secteurs__header {
+  text-align: center;
   margin-bottom: 72px;
+  padding: 0 24px;
 }
 
 .section-label {
@@ -122,7 +164,7 @@ onMounted(() => {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: 52px;
+  font-size: clamp(32px, 4vw, 52px);
   font-weight: 800;
   text-transform: uppercase;
   color: var(--color-white);
@@ -133,114 +175,212 @@ onMounted(() => {
 
 .section-subtitle {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 300;
   color: var(--color-muted);
 }
 
-.secteurs__list {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
+/* ── CAROUSEL WRAP ── */
+.secteurs__carousel-wrap {
+  position: relative;
+  padding: 0 80px;
+  max-width: 1480px;
+  margin: 0 auto;
 }
 
-.secteur-item {
-  display: flex;
-  align-items: center;
-  flex: 1;
+.secteurs__viewport {
+  overflow: hidden;
 }
 
-.secteur-item__inner {
+.secteurs__track {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 0 40px 0 0;
-  flex: 1;
+  gap: 12px;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.secteur-item__icon {
+/* ── CARD ── */
+.secteur-card {
+  position: relative;
+  height: 480px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.secteur-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: saturate(0.25) brightness(0.75);
+  transition: transform 0.8s ease, filter 0.5s ease;
+}
+
+.secteur-card:hover .secteur-card__img {
+  transform: scale(1.04);
+  filter: saturate(0.4) brightness(0.85);
+}
+
+.secteur-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+.secteur-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 28px;
+}
+
+.secteur-card__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   color: var(--color-gold);
+  margin-bottom: 10px;
+}
+
+.secteur-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.4vw, 22px);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-white);
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* ── ARROWS ── */
+.secteurs__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.secteur-item__name {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--color-white);
-  line-height: 1.2;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
-.secteur-item__sep {
-  width: 1px;
-  height: 80px;
-  background: var(--color-border);
+.secteurs__arrow:hover:not(.disabled) {
+  background: rgba(201, 162, 96, 0.15);
+  border-color: rgba(201, 162, 96, 0.4);
+  color: var(--color-gold);
+}
+
+.secteurs__arrow.disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+.secteurs__arrow--prev { left: 16px; }
+.secteurs__arrow--next { right: 16px; }
+
+/* ── DOTS ── */
+.secteurs__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.secteurs__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+}
+
+.secteurs__dot.active {
+  background: var(--color-gold);
+  transform: scale(1.4);
+}
+
+/* ── CTA ── */
+.secteurs__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 72px;
+  padding: 0 24px;
+}
+
+.secteurs__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  background: var(--color-gold);
+  padding: 14px 28px;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.secteurs__btn span {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0F0F0F;
+}
+
+.secteurs__btn-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0F0F0F;
   flex-shrink: 0;
-  margin-right: 40px;
 }
 
-@media (max-width: 1200px) {
-  .secteurs__container {
-    padding: 0 40px;
-  }
+.secteurs__btn:hover {
+  opacity: 0.88;
+}
 
-  .secteur-item__inner {
-    padding-right: 24px;
-  }
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
 
-  .secteur-item__sep {
-    margin-right: 24px;
-  }
-
-  .secteur-item__name {
-    font-size: 15px;
-  }
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .secteurs__carousel-wrap { padding: 0 52px; }
+  .secteurs__arrow--prev { left: 4px; }
+  .secteurs__arrow--next { right: 4px; }
 }
 
 @media (max-width: 768px) {
-  .secteurs {
-    padding: 80px 0;
-  }
-
-  .secteurs__container {
-    padding: 0 24px;
-  }
-
-  .section-title {
-    font-size: 38px;
-  }
-
-  .secteurs__header {
-    margin-bottom: 48px;
-  }
-
-  .secteurs__list {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .secteur-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .secteur-item__inner {
-    flex-direction: row;
-    align-items: center;
-    padding: 24px 0;
-    gap: 20px;
-    width: 100%;
-  }
-
-  .secteur-item__sep {
-    width: 100%;
-    height: 1px;
-    margin: 0;
-  }
+  .secteurs { padding: 80px 0; }
+  .secteurs__header { margin-bottom: 48px; }
+  .secteurs__carousel-wrap { padding: 0 44px; }
+  .secteur-card { height: 360px; }
+  .secteurs__cta { margin-top: 48px; }
 }
 </style>

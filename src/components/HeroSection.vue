@@ -1,346 +1,182 @@
 <template>
   <section class="hero">
-    <!-- Left content -->
-    <div class="hero__left">
-      <div class="hero__brand">
-        <!--<span class="hero__brand-mark"><img src="/src/assets/logo/Logo 2 Verticale.png" alt="" width="80px"></span>
-        <span class="hero__brand-name">
-          <span class="hero__brand-dot"></span>
-          Systèmes de sécurité & gardiennage
-          <span class="hero__brand-dot"></span>
-        </span>-->
-      </div>
+    <img :src="heroBg" alt="" class="hero__bg" />
+    <div class="hero__overlay"></div>
 
+    <div class="hero__content">
       <h1 class="hero__title">
         Protégez vos biens.<br />
-        <span class="hero__title-stroke">Sécurisez</span><br />
-        vos espaces.
+        <span class="hero__title-gold">Sécurisez vos espaces.</span>
       </h1>
 
-      <p class="hero__intro">Sierra Sécurité accompagne particuliers et professionnels dans la mise en place de solutions de sécurité durables, adaptées à chaque environnement.</p>
+      <p class="hero__intro">
+        Sierra Sécurité accompagne particuliers et professionnels dans la mise en place
+        de solutions de sécurité durables, adaptées à chaque environnement.
+      </p>
 
-      <!--<div class="hero__meta">
-        <span class="hero__meta-pill">CNAPS certifiés</span>
-        <span class="hero__meta-pill">48h déploiement</span>
-        <span class="hero__meta-pill">24/7</span>
-      </div>-->
-
-      <router-link :to="{ path: '/', hash: '#solutions' }" class="hero__cta">
-        <span>NOS SERVICES</span>
-        <div class="hero__cta-arrow">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </router-link>
-    </div>
-
-    <!-- Right: 2x2 service grid -->
-    <div class="hero__grid">
-      <div class="hero__cell" v-for="s in services" :key="s.label">
-        <img :src="s.img" :alt="s.label" class="hero__cell-img" />
-        <div class="hero__cell-overlay"></div>
-        <div class="hero__cell-content">
-          <span class="hero__cell-num">{{ s.num }}</span>
-          <span class="hero__cell-label">{{ s.label }}</span>
-        </div>
+      <div class="hero__actions">
+        <router-link to="/contact" class="hero__cta-primary">
+          <span>Je sécurise mon bien</span>
+          <div class="hero__cta-arrow">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </router-link>
+        <a href="tel:0180894979" class="hero__cta-secondary">Être rappelé</a>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import imgAlarme from '../assets/photos/alarme.jpg'
-import imgVideo from '../assets/photos/surveillance.png'
-import imgGard from '../assets/photos/gardiennage.jpeg'
-import imgPorte from '../assets/photos/porte-antisquat.jpeg'
-
-const services = [
-  { num: '01', label: 'Alarme anti-intrusion', img: imgAlarme },
-  { num: '02', label: 'Vidéosurveillance',     img: imgVideo  },
-  { num: '03', label: 'Gardiennage',            img: imgGard   },
-  { num: '04', label: 'Porte anti-squat',       img: imgPorte  },
-]
+import heroBg from '../assets/photos/hero.jpeg'
 </script>
 
 <style scoped>
 .hero {
-  display: flex;
+  position: relative;
   height: 100vh;
-  min-height: 700px;
+  min-height: 680px;
   overflow: hidden;
-}
-
-/* ── LEFT ── */
-.hero__left {
-  width: 42%;
-  flex-shrink: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 64px 56px 64px 72px;
-  border-right: 1px solid rgba(201, 162, 96, 0.1);
-  position: relative;
-  background: var(--color-bg);
-  animation: heroSlideLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  align-items: flex-end;
 }
 
-.hero__left::before {
-  content: '';
+.hero__bg {
   position: absolute;
-  left: 0;
-  top: 20%;
-  bottom: 20%;
-  width: 2px;
-  background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
-}
-
-.hero__brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 0px;
-}
-.hero__brand-mark {
-  color: var(--color-gold);
-  font-size: 14px;
-  flex-shrink: 0;
-}
-.hero__brand-name {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(201, 162, 96, 0.75);
-  padding: 6px 14px;
-  border: 1px solid rgba(201, 162, 96, 0.2);
-  background: rgba(201, 162, 96, 0.04);
-  border-radius: 16px;
-}
-.hero__brand-dot {
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  background: var(--color-gold);
-  opacity: 0.5;
-  flex-shrink: 0;
-}
-
-.hero__title {
-  font-family: var(--font-display);
-  font-size: clamp(44px, 4.2vw, 64px);
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-white);
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  margin-bottom: 36px;
-  margin-top: 10px;
-}
-
-.hero__title-stroke {
-  -webkit-text-stroke: 2px rgba(201, 162, 96, 0.5);
-  color: transparent;
-}
-
-.hero__intro {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--color-muted);
-  margin-bottom: 32px;
-  max-width: 580px;
-}
-
-.hero__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 48px;
-}
-
-.hero__meta-pill {
-  display: inline-block;
-  padding: 5px 12px;
-  border: 1px solid rgba(201, 162, 96, 0.25);
-  font-family: var(--font-body);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(201, 162, 96, 0.7);
-  background: rgba(201, 162, 96, 0.04);
-  border-radius: 2px;
-}
-
-.hero__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  text-decoration: none;
-}
-
-.hero__cta span {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  transition: color 0.2s;
-}
-
-.hero__cta-arrow {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(201, 162, 96, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-gold);
-  transition: all 0.25s;
-  flex-shrink: 0;
-}
-
-.hero__cta:hover .hero__cta-arrow {
-  background: var(--color-gold);
-  color: var(--color-bg);
-  border-color: var(--color-gold);
-}
-
-/* ── RIGHT GRID ── */
-.hero__grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  overflow: hidden;
-  animation: heroSlideRight 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-.hero__cell {
-  position: relative;
-  overflow: hidden;
-  cursor: default;
-}
-
-.hero__cell-img {
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.6s ease;
-  filter: saturate(0.3) brightness(1);
 }
 
-.hero__cell:hover .hero__cell-img {
-  transform: scale(1.04);
-  filter: saturate(0.5) brightness(1);
-}
-
-.hero__cell-overlay {
+.hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 8, 8, 0.05) 0%,
-    rgba(8, 8, 8, 0.0) 40%,
-    rgba(8, 8, 8, 0.72) 100%
-  );
-  transition: background 0.4s ease;
+  background: rgba(8, 8, 8, 0.85);
 }
 
-.hero__cell:hover .hero__cell-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 8, 8, 0.05) 0%,
-    rgba(8, 8, 8, 0.0) 30%,
-    rgba(8, 8, 8, 0.80) 100%
-  );
-}
-
-.hero__cell:nth-child(1) { border-right: 1px solid rgba(201, 162, 96, 0.12); border-bottom: 1px solid rgba(201, 162, 96, 0.12); }
-.hero__cell:nth-child(2) { border-bottom: 1px solid rgba(201, 162, 96, 0.12); }
-.hero__cell:nth-child(3) { border-right: 1px solid rgba(201, 162, 96, 0.12); }
-
-.hero__cell-content {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
+.hero__content {
+  position: relative;
   z-index: 2;
+  padding: 0 80px 96px;
+  /* max-width: 1000px; */
 }
 
-.hero__cell-num {
-  display: block;
+.hero__title {
   font-family: var(--font-display);
-  font-size: 11px;
+  font-size: clamp(48px, 5.5vw, 80px);
   font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--color-gold);
-  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  margin-bottom: 28px;
+  animation: fadeUp 0.7s 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.hero__cell-label {
-  display: block;
+.hero__title-gold {
+  color: var(--color-gold);
+}
+
+.hero__intro {
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 40px;
+  max-width: 700px;
+  animation: fadeUp 0.7s 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  animation: fadeUp 0.7s 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.hero__cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  background: var(--color-gold);
+  padding: 14px 28px;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.hero__cta-primary span {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0F0F0F;
+}
+
+.hero__cta-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0F0F0F;
+  flex-shrink: 0;
+}
+
+.hero__cta-primary:hover {
+  opacity: 0.88;
+}
+
+.hero__cta-secondary {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #ffffff;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  /*background: rgba(255, 255, 255, 0.1);*/
+  padding: 14px 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s;
 }
 
-/* ── Animations ── */
-@keyframes heroSlideLeft {
-  from { opacity: 0; transform: translateX(-24px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes heroSlideRight {
-  from { opacity: 0; transform: translateX(24px); }
-  to   { opacity: 1; transform: translateX(0); }
+.hero__cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero__title  { animation: fadeUp 0.6s 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-.hero__intro  { animation: fadeUp 0.6s 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-.hero__cta    { animation: fadeUp 0.6s 0.4s  cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-
-@media (max-width: 900px) {
-  .hero__left  { animation-name: fadeUp; }
-  .hero__grid  { animation-name: fadeUp; animation-delay: 0.15s; }
 }
 
 @media (max-width: 900px) {
   .hero {
+    align-items: flex-end;
+    max-height: 680px;
+  }
+
+  .hero__content {
+    padding: 0 24px 72px;
+  }
+  .hero__title {
+    font-size: clamp(20px, 9vw, 56px);
+    margin-bottom: 18px;
+  }
+  .hero__intro{
+    font-size: 16px;
+  }
+  .hero__actions {
     flex-direction: column;
-    height: auto;
-  }
-  .hero__left {
-    width: 100%;
-    padding: 108px 24px 40px;
-    border-right: none;
-    border-bottom: 1px solid rgba(201, 162, 96, 0.1);
-  }
-  .hero__left::before { display: none; }
-  .hero__brand { display: none; }
-  .hero__title { font-size: clamp(40px, 10vw, 56px); margin-bottom: 24px; margin-top: 0; }
-  .hero__meta { margin-bottom: 32px; }
-  .hero__grid {
-    display: flex;
-    flex-direction: column;
-  }
-  .hero__cell {
-    height: 250px;
+    align-items: flex-start;
+    gap: 20px;
   }
 }
 </style>

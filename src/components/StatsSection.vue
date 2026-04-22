@@ -117,12 +117,12 @@ onMounted(() => {
 .gold { color: var(--color-gold); }
 .stats__subtitle {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 300;
   color: var(--color-muted);
   max-width: 580px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 /* Bento */
@@ -144,7 +144,7 @@ onMounted(() => {
 }
 .featured__eyebrow {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -234,7 +234,7 @@ onMounted(() => {
 
 .cell__label {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -268,7 +268,7 @@ onMounted(() => {
 }
 .footer__247-label {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 15px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-muted);
@@ -281,7 +281,7 @@ onMounted(() => {
 }
 .footer__note {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;

@@ -154,7 +154,7 @@ const logos = [
   align-items: center;
   justify-content: center;
   height: 100px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-bg);
   border: 1px solid rgba(255, 255, 255, 0.06);
   padding: 20px 28px;
   transition: background 0.3s ease, border-color 0.3s ease;

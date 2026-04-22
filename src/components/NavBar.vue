@@ -220,6 +220,18 @@ onUnmounted(() => {
   background: transparent;
   border-bottom: 1px solid transparent;
   transition: background var(--transition), border-color var(--transition);
+  padding-bottom: 5px;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.5px;
+  background: #70707077;
+  opacity: 0.45;
 }
 
 .navbar--scrolled {
@@ -251,7 +263,7 @@ onUnmounted(() => {
 .navbar__links > li > a,
 .navbar__links > li > .router-link-active {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--color-text);
@@ -273,7 +285,7 @@ onUnmounted(() => {
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--color-text);
@@ -407,8 +419,8 @@ onUnmounted(() => {
 }
 
 .btn-gold {
-  background: rgba(8, 8, 8, 0.92);
-  color: var(--color-gold);
+  background: var(--color-gold);
+  color: #080808;
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 600;
@@ -424,6 +436,7 @@ onUnmounted(() => {
   padding-right: 3.3em;
   position: relative;
   overflow: hidden;
+  border-radius: 4px;
 }
 
 .btn-gold__text {

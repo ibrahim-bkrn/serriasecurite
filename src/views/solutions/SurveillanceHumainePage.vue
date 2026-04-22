@@ -10,18 +10,18 @@
           <span>/</span>
           <router-link to="/solutions/surveillance-humaine">Surveillance humaine</router-link>
         </nav>
-        <p class="sh-hero__label">Gardiennage humain</p>
         <h1 class="sh-hero__title">
           Surveillance<br />
           <span class="sh-hero__title-stroke">Humaine</span>
         </h1>
+        <p class="sh-hero__label">Gardiennage humain | Rondes | Interventions sur alarme</p>
         <p class="sh-hero__sub">
           Des agents certifiés CNAPS, déployés en 24h sur toute l'Île-de-France.
-          Présence dissuasive, rondes et intervention immédiate.
+          Prévenir les risques. Protéger vos biens. Agir immédiatement.
         </p>
         <div class="sh-hero__actions">
           <router-link to="/contact" class="sh-cta-primary">
-            <span>Parler à un responsable sécurité</span>
+            <span>Je sécurise mon bien</span>
             <div class="sh-cta-primary__arrow">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -395,7 +395,7 @@ onMounted(() => {
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
-  max-width: 420px;
+  max-width: 460px;
   margin-bottom: 28px;
 }
 

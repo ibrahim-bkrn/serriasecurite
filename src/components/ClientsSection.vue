@@ -144,16 +144,14 @@ onMounted(() => {
 }
 
 .client-logo img {
-  width: 100%;
-  max-width: 130px;
-  max-height: 56px;
+  width: 120px;
+  height: 48px;
   object-fit: contain;
-  filter: opacity(0.75);
   transition: filter var(--transition);
 }
 
 .client-logo:hover img {
-  filter: opacity(1);
+  filter: brightness(0) invert(1) opacity(0.9);
 }
 
 @media (max-width: 1200px) {
