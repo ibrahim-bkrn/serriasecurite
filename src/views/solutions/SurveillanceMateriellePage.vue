@@ -226,7 +226,7 @@ const services = [
   {
     id: 'sites-inocupes',
     num: '03',
-    label: 'Sites inoccupés',
+    label: 'Alarme biens vacants',
     img: sitesImg,
     route: '/solutions/alarme-sites-inocupes',
     title: 'Alarme sites inoccupés',
