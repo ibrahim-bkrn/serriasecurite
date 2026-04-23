@@ -10,22 +10,13 @@
           <span>/</span>
           <span>Surveillance matérielle</span>
         </nav>
-        <div class="sm-hero__certs">
-          <span>Certifié AJAX</span>
-          <span class="dot">·</span>
-          <span>CNIL / RGPD</span>
-          <span class="dot">·</span>
-          <span>Île-de-France</span>
-        </div>
       </div>
 
       <div class="sm-hero__center">
         <h1 class="sm-hero__title">
           <span class="sm-hero__title-top">Surveillance</span>
           <span class="sm-hero__title-sep">
-            <span class="sm-hero__sep-line"></span>
-            <span class="sm-hero__sep-label">Sécurité électronique</span>
-            <span class="sm-hero__sep-line"></span>
+            <img :src="nvrImg" alt="" class="sm-hero__sep-img"  />
           </span>
           <span class="sm-hero__title-bottom">Matérielle</span>
         </h1>
@@ -34,8 +25,7 @@
       <div class="sm-hero__footer">
         <div class="sm-hero__footer-left">
           <p class="sm-hero__sub">
-            Caméras HD, alarmes autonomes, télésurveillance et portes blindées —
-            installés en 48h, configurés clé en main, opérationnels 24/7.
+            Caméras HD, alarmes autonomes et télésurveillance — installés en 48h, configurés clé en main, opérationnels 24/7.
           </p>
           <div class="sm-hero__actions">
             <router-link to="/contact" class="sm-cta-primary">
@@ -65,8 +55,6 @@
         :class="{ active: activeService === i }"
         @click="activeService = i"
       >
-        <img :src="svc.img" :alt="svc.label" class="sm-strip__img" />
-        <div class="sm-strip__overlay"></div>
         <div class="sm-strip__content">
           <span class="sm-strip__num">{{ svc.num }}</span>
           <span class="sm-strip__label">{{ svc.label }}</span>
@@ -92,8 +80,8 @@
                 {{ point }}
               </li>
             </ul>
-            <router-link to="/contact" class="sm-panel__cta">
-              Demander un devis
+            <router-link :to="services[activeService].route" class="sm-panel__cta">
+              En savoir plus
               <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
                 <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -189,16 +177,16 @@ import NavBar        from '../../components/NavBar.vue'
 import FooterSection from '../../components/FooterSection.vue'
 import PageCTA       from '../../components/PageCTA.vue'
 
-import videoImg  from '../../assets/photos/videosurveillance.jpg'
-import alarmeImg from '../../assets/photos/alarme.jpg'
-import sitesImg  from '../../assets/photos/surveillance2.jpeg'
-import porteImg  from '../../assets/photos/porte-antisquat.jpeg'
+import videoImg  from '../../assets/photos/camera-turret.png'
+import alarmeImg from '../../assets/photos/alarme-hub.png'
+import sitesImg  from '../../assets/photos/alarme-sites.png'
+import nvrImg    from '../../assets/photos/nvr.png'
 
 const activeService = ref(0)
 
 const heroStats = [
   { num: '48h', label: 'Installation garantie' },
-  { num: '4',   label: 'Solutions intégrées'   },
+  { num: '3',   label: 'Solutions intégrées'   },
   { num: '24/7', label: 'Surveillance active'  },
 ]
 
@@ -208,6 +196,7 @@ const services = [
     num: '01',
     label: 'Vidéosurveillance',
     img: videoImg,
+    route: '/solutions/videosurveillance',
     title: 'Vidéosurveillance',
     desc: 'Surveillez depuis votre smartphone, 24h/24, avec des alertes précises et zéro fausse alarme.',
     points: [
@@ -223,13 +212,14 @@ const services = [
     num: '02',
     label: 'Alarme anti-intrusion',
     img: alarmeImg,
+    route: '/solutions/alarme-anti-intrusion',
     title: 'Alarme anti-intrusion',
     desc: 'Détection, télésurveillance et intervention physique — trois couches indissociables.',
     points: [
       'Système AJAX sans fil, sans électricité ni Internet',
       'Télésurveillance 24/7 par centre certifié APSAD P3',
       'Levée de doute photo/vidéo instantanée',
-      'Intervention d\'un agent sur site dès alarme confirmée',
+      "Intervention d'un agent sur site dès alarme confirmée",
       'Certifié Grade 2 / Grade 3 selon configuration',
     ],
   },
@@ -238,6 +228,7 @@ const services = [
     num: '03',
     label: 'Sites inoccupés',
     img: sitesImg,
+    route: '/solutions/alarme-sites-inocupes',
     title: 'Alarme sites inoccupés',
     desc: 'Un site vide est une cible facile. Avec Sierra Sécurité, il devient inaccessible.',
     points: [
@@ -246,21 +237,6 @@ const services = [
       'Détecteurs extérieurs HD avec levée de doute visuelle',
       'Intervention humaine immédiate sur déclenchement',
       'Chantiers, entrepôts, logements vacants, successions',
-    ],
-  },
-  {
-    id: 'porte-antisquat',
-    num: '04',
-    label: 'Porte anti-squat',
-    img: porteImg,
-    title: 'Porte anti-squat',
-    desc: 'La protection physique la plus immédiate contre squatteurs et intrus — posée en moins d\'une heure.',
-    points: [
-      'Acier renforcé, serrure 3 points, anti-dégondage',
-      'Certifiée A2P BP1 — résistance validée par tests agréés',
-      'Installation réversible sans dégradation du cadre',
-      'Disponible en location courte/longue durée ou à l\'achat',
-      'Compatible alarme et télésurveillance',
     ],
   },
 ]
@@ -367,6 +343,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0;
+  text-align: center;
 }
 
 .sm-hero__title-top,
@@ -389,10 +366,24 @@ onMounted(() => {
 
 .sm-hero__title-sep {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 18px 0;
-  margin-bottom: 5px;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.sm-hero__sep-img {
+  height: 280px;
+  width: auto;
+  object-fit: contain;
+  opacity: 1;
+  margin-block: -120px;
+  z-index: 100;
+}
+
+@media (max-width: 900px) {
+  .sm-hero__sep-img { 
+    height: 180px; 
+    margin-block: -80px;
+}
 }
 
 .sm-hero__sep-line {
@@ -424,21 +415,23 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-.sm-hero__footer-left { max-width: 480px; }
+.sm-hero__footer-left { max-width: 640px; }
 
 .sm-hero__sub {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.75;
   margin-bottom: 28px;
 }
 
-.sm-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+@media (max-width: 900px) {
+  .sm-hero__sub {
+    font-size: 19px;
+    line-height: 1.5;
+    
+  }
 }
 
 .sm-cta-primary {
@@ -500,7 +493,7 @@ onMounted(() => {
 
 .sm-hero__stat-num {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 800;
   color: var(--color-gold);
   line-height: 1;
@@ -508,7 +501,7 @@ onMounted(() => {
 
 .sm-hero__stat-label {
   font-family: var(--font-body);
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-muted);
@@ -518,8 +511,8 @@ onMounted(() => {
 /* ── SERVICE STRIP ── */
 .sm-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  height: 200px;
+  grid-template-columns: repeat(3, 1fr);
+  height: 180px;
   border-top: 1px solid var(--color-border);
 }
 
@@ -530,63 +523,51 @@ onMounted(() => {
   border: none;
   border-right: 1px solid var(--color-border);
   padding: 0;
-  background: none;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: background 0.3s;
 }
 
 .sm-strip__item:last-child { border-right: none; }
 
-.sm-strip__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: saturate(0.15) brightness(0.7);
-  transition: filter 0.5s ease, transform 0.6s ease;
-}
+.sm-strip__item:hover { background: rgba(201,162,96,0.04); }
+.sm-strip__item.active { background: rgba(201,162,96,0.06); }
 
-.sm-strip__item.active .sm-strip__img,
-.sm-strip__item:hover .sm-strip__img {
-  filter: saturate(0.4) brightness(0.85);
-  transform: scale(1.04);
-}
-
-.sm-strip__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.2) 60%);
-}
+.sm-strip__overlay { display: none; }
 
 .sm-strip__content {
-  position: absolute;
-  bottom: 18px;
-  left: 20px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 6px;
 }
 
 .sm-strip__num {
-  font-family: var(--font-display);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgba(201,162,96,0.6);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  color: rgba(201,162,96,0.2);
   transition: color 0.3s;
 }
 
-.sm-strip__item.active .sm-strip__num { color: var(--color-gold); }
+.sm-strip__item.active .sm-strip__num,
+.sm-strip__item:hover .sm-strip__num { color: var(--color-gold); }
 
 .sm-strip__label {
-  font-family: var(--font-body);
-  font-size: 11px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  letter-spacing: 0em;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.35);
   transition: color 0.3s;
 }
 
-.sm-strip__item.active .sm-strip__label { color: var(--color-white); }
+.sm-strip__item.active .sm-strip__label,
+.sm-strip__item:hover .sm-strip__label { color: var(--color-white); }
 
 /* gold bottom bar indicator */
 .sm-strip__bar {
@@ -612,6 +593,12 @@ onMounted(() => {
   height: 580px;
 }
 
+@media (max-width: 900px) {
+  .sm-panel {
+    height: 300px;
+  }
+}
+
 .sm-fade-enter-active,
 .sm-fade-leave-active {
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -627,14 +614,17 @@ onMounted(() => {
 .sm-panel__img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
-  filter: saturate(0.25) brightness(0.85);
-  transition: filter 0.5s ease;
+  padding: 48px 40px;
+  opacity: 0.75;
+  transition: opacity 0.4s ease, transform 0.5s ease;
 }
 
 .sm-panel__img:hover img {
-  filter: saturate(0.4) brightness(0.9);
+  opacity: 1;
+  transform: scale(1.04);
 }
 
 .sm-panel__text {
@@ -667,12 +657,12 @@ onMounted(() => {
 
 .sm-panel__desc {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 22px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
   margin-bottom: 20px;
-  max-width: 420px;
+  max-width: 550px;
 }
 
 .sm-panel__list {
@@ -689,7 +679,7 @@ onMounted(() => {
   align-items: baseline;
   gap: 14px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 300;
   color: var(--color-text);
   padding: 9px 0;
@@ -787,7 +777,7 @@ onMounted(() => {
   font-family: var(--font-display);
   font-size: 56px;
   font-weight: 800;
-  color: rgba(201,162,96,0.18);
+  color: rgba(201,162,96,1);
   line-height: 1;
   transition: color 0.3s;
 }
@@ -795,14 +785,14 @@ onMounted(() => {
 .sm-step:hover .sm-step__num { color: var(--color-gold); }
 
 .sm-step__title {
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 600;
   color: var(--color-white);
   margin-bottom: 8px;
 }
 
 .sm-step__text {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
@@ -975,7 +965,10 @@ onMounted(() => {
   .sm-hero__title-top,
   .sm-hero__title-bottom { font-size: clamp(52px, 14vw, 80px); }
   .sm-strip { grid-template-columns: repeat(2, 1fr); height: auto; }
-  .sm-strip__item { height: 120px; }
+  .sm-strip__item { height: 100px; }
+  .sm-strip__item:last-child { grid-column: 1 / -1; }
+  .sm-strip__num { font-size: 36px; }
+  .sm-strip__label { font-size: 23px; }
   .sm-panel__text { padding: 36px 24px; }
   .sm-method__container,
   .sm-testi__container { padding: 48px 24px; }

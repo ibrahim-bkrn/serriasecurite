@@ -188,7 +188,7 @@
             :class="[`reveal-delay-${i + 1}`, { visible: sVis }]"
           >
             <span class="sh-engagement__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" />
               </svg>
             </span>
@@ -520,7 +520,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center  ;
   display: block;
   filter: saturate(0.4) brightness(0.9);
 }
@@ -885,7 +885,7 @@ onMounted(() => {
 
 .section-label {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -1093,6 +1093,7 @@ onMounted(() => {
   text-align: center;
   text-decoration: none;
   background: var(--color-bg);
+  box-shadow: 0 0 0 1px rgba(201, 162, 96, 0.052);
   padding: 56px 80px;
   max-width: 700px;
   width: 100%;
@@ -1118,7 +1119,7 @@ onMounted(() => {
   margin-bottom: 16px;
 }
 .cs-v3__text {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
@@ -1192,7 +1193,7 @@ onMounted(() => {
 }
 
 .sh-engagements__container {
-  max-width: 1280px;
+  max-width: 1480px;
   margin: 0 auto;
   padding: 0 80px;
 }
@@ -1223,7 +1224,7 @@ onMounted(() => {
 }
 
 .sh-engagement__text {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 400;
   color: var(--color-text);
   letter-spacing: 0.02em;

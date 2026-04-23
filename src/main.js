@@ -4,7 +4,10 @@ import App from './App.vue'
 
 import HomePage from './views/HomePage.vue'
 import SurveillanceHumainePage from './views/solutions/SurveillanceHumainePage.vue'
-import SurveillanceMateriellePage from './views/solutions/SurveillanceMateriellePage.vue'
+import SurveillanceMateriellePage  from './views/solutions/SurveillanceMateriellePage.vue'
+import VideoSurveillancePage       from './views/solutions/VideoSurveillancePage.vue'
+import AlarmeAntiIntrusionPage     from './views/solutions/AlarmeAntiIntrusionPage.vue'
+import AlarmeSitesInocupesPage     from './views/solutions/AlarmeSitesInocupesPage.vue'
 import ContactPage from './views/ContactPage.vue'
 import SecteursPage from './views/SecteursPage.vue'
 import NotFoundPage from './views/NotFoundPage.vue'
@@ -21,7 +24,10 @@ const router = createRouter({
   routes: [
     { path: '/',                                  component: HomePage },
     { path: '/solutions/surveillance-humaine',    component: SurveillanceHumainePage },
-    { path: '/solutions/surveillance-materielle', component: SurveillanceMateriellePage },
+    { path: '/solutions/surveillance-materielle',    component: SurveillanceMateriellePage  },
+    { path: '/solutions/videosurveillance',          component: VideoSurveillancePage       },
+    { path: '/solutions/alarme-anti-intrusion',      component: AlarmeAntiIntrusionPage     },
+    { path: '/solutions/alarme-sites-inocupes',      component: AlarmeSitesInocupesPage     },
     { path: '/contact',                            component: ContactPage },
     { path: '/secteurs',                           component: SecteursPage },
     { path: '/design/a', component: DesignA },
