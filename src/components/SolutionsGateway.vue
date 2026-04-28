@@ -46,7 +46,7 @@
 import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 
-import humainImg    from '../assets/photos/gardiennage3.jpeg'
+import humainImg    from '../assets/photos/real-4.png'
 import electroImg   from '../assets/photos/alarme2.jpeg'
 import physiqueImg  from '../assets/photos/porte-antisquat2.jpeg'
 
@@ -67,7 +67,7 @@ const cards = [
     desc: "Nos systèmes d'alarme anti-intrusion détectent toute tentative d'effraction en temps réel. La vidéosurveillance HD couvre vos espaces en continu. La télésurveillance APSAD P3 garantit une levée de doute et une intervention rapide.",
   },
   {
-    route: null,
+    route:'/solutions/protection-physique',
     img: physiqueImg,
     title: 'Protection Physique',
     desc: "Nos portes anti-squat sécurisent vos accès et empêchent toute occupation illicite de vos biens vacants. Robustes, certifiées et installées rapidement sur toute l'Île-de-France.",

@@ -125,6 +125,8 @@ onMounted(() => {
   line-height: 1.5;
 }
 
+
+
 /* Bento */
 .bento {
   display: grid;
@@ -169,7 +171,7 @@ onMounted(() => {
   font-weight: 700;
   text-transform: uppercase;
   color: #0F0F0F;
-  letter-spacing: 0.04em;
+  letter-spacing: 0em;
   line-height: 1.2;
 }
 
@@ -311,6 +313,7 @@ onMounted(() => {
   .bento__featured { min-height: 280px; }
   .stats__footer { flex-wrap: wrap; gap: 24px; }
   .footer__sep { display: none; }
+  .stats__subtitle{font-size: 16px}
 }
 @media (max-width: 600px) {
   .stats__container { padding: 0 24px; }

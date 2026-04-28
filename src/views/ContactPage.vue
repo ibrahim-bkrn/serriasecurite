@@ -25,35 +25,33 @@
             <span class="cp-breadcrumb__active">Contact</span>
           </nav>
 
-          <p class="cp-label cp-anim cp-anim-2">Parlons de votre projet</p>
+          <p class="cp-label cp-anim cp-anim-2">Contactez-nous</p>
           <h1 class="cp-title cp-anim cp-anim-3">
-            Sécurisons<br />
-            <span class="cp-title-stroke">votre bien.</span>
+            Parlons de<br />
+            <span class="cp-title-stroke">votre projet.</span>
           </h1>
-          <p class="cp-sub cp-anim cp-anim-4">
-            Décrivez votre besoin, nous revenons vers vous avec
-            une solution adaptée à votre site et votre budget.
-          </p>
         </div>
 
-        <!--<div class="cp-actions">
-          <a href="#formulaire" class="cp-cta-primary">Envoyer un message</a>
-          <a href="tel:0782564979" class="cp-cta-secondary">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
-            </svg>
-            07 82 56 49 79
-          </a>
-        </div>-->
+        <!-- Numéro mis en avant -->
+        <div class="cp-phone-block cp-anim cp-anim-4">
+          <span class="cp-phone-block__label">Ligne directe</span>
+          <a href="tel:0782564979" class="cp-phone-block__number">07 82 56 49 79</a>
+          <span class="cp-phone-block__hint">Disponible 7j/7 — réponse immédiate</span>
+        </div>
 
-        <!-- 3 blocs info sur la même ligne -->
+        <!-- 3 infos simples -->
         <div class="cp-info-row cp-anim cp-anim-5">
-          <div v-for="card in infoCards" :key="card.title" class="cp-info-card">
-            <div class="cp-info-card__icon"><component :is="card.icon" /></div>
-            <h3 class="cp-info-card__title">{{ card.title }}</h3>
-            <p class="cp-info-card__sub">{{ card.sub }}</p>
-            <a v-if="card.href" :href="card.href" class="cp-info-card__value cp-info-card__link">{{ card.value }}</a>
-            <span v-else class="cp-info-card__value">{{ card.value }}</span>
+          <div class="cp-info-item">
+            <span class="cp-info-item__icon">📍</span>
+            <span class="cp-info-item__text">Paris · Île-de-France</span>
+          </div>
+          <div class="cp-info-item">
+            <span class="cp-info-item__icon">⏱</span>
+            <span class="cp-info-item__text">Lun – Dim : 7h – 22h</span>
+          </div>
+          <div class="cp-info-item">
+            <span class="cp-info-item__icon">✉</span>
+            <span class="cp-info-item__text">Réponse sous 24h</span>
           </div>
         </div>
       </div>
@@ -155,27 +153,8 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineComponent, h } from 'vue'
+import { ref, reactive } from 'vue'
 import logo from '../assets/logo/logo-horizontal.png'
-
-const IconPhone = defineComponent({ render: () => h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none' }, [
-  h('path', { d: 'M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z', fill: 'currentColor' })
-]) })
-
-const IconPin = defineComponent({ render: () => h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none' }, [
-  h('path', { d: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z', fill: 'currentColor' })
-]) })
-
-const IconClock = defineComponent({ render: () => h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none' }, [
-  h('circle', { cx: 12, cy: 12, r: 10, stroke: 'currentColor', 'stroke-width': 1.5 }),
-  h('path', { d: 'M12 7v5l3 3', stroke: 'currentColor', 'stroke-width': 1.5, 'stroke-linecap': 'round' })
-]) })
-
-const infoCards = [
-  { icon: IconPhone, title: 'Téléphone direct',    sub: 'Nous répondons rapidement à toute demande.',      value: '07 82 56 49 79',       href: 'tel:0782564979' },
-  { icon: IconPin,   title: "Zone d'intervention", sub: "Toute l'Île-de-France, Paris & grande couronne.", value: 'Paris · Île-de-France', href: null },
-  { icon: IconClock, title: 'Disponibilité',       sub: 'Urgences disponibles 24h/24, 7j/7.',              value: 'Lun – Dim : 7h – 22h',  href: null },
-]
 
 const besoins = [
   'Alarme anti-intrusion', 'Vidéosurveillance', 'Gardiennage humain',
@@ -262,7 +241,7 @@ function submitForm() {
 /* ── Grille 2 colonnes ── */
 .cp-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 4fr;
   flex: 1;
   overflow: hidden;
   margin-top: 64px;
@@ -334,7 +313,6 @@ function submitForm() {
   color: var(--color-white);
   line-height: 0.95;
   letter-spacing: 0.01em;
-  margin-bottom: 20px;
 }
 
 .cp-title-stroke {
@@ -391,64 +369,79 @@ function submitForm() {
 
 .cp-cta-secondary:hover { color: var(--color-gold); }
 
-/* ── 3 blocs info — pleine largeur ── */
-.cp-info-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--color-border);
-  margin: auto -80px -40px -80px;
-}
-
-.cp-info-card {
-  padding: 32px 24px;
-  border-right: 1px solid var(--color-border);
+/* ── Numéro mis en avant ── */
+.cp-phone-block {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   gap: 8px;
+  padding: 28px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 0;
 }
 
-.cp-info-card:last-child { border-right: none; }
-
-.cp-info-card__icon {
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgba(201, 162, 96, 0.25);
-  background: rgba(201, 162, 96, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-gold);
-  margin-bottom: 10px;
-}
-
-.cp-info-card__title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
+.cp-phone-block__label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--color-white);
-  letter-spacing: 0.04em;
+  color: var(--color-gold);
+  opacity: 0.7;
 }
 
-.cp-info-card__sub {
-  font-size: 12px;
+.cp-phone-block__number {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 800;
+  color: var(--color-gold);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.cp-phone-block__number:hover { opacity: 0.8; }
+
+.cp-phone-block__hint {
+  font-family: var(--font-body);
+  font-size: 13px;
   font-weight: 300;
   color: var(--color-muted);
-  line-height: 1.6;
 }
 
-.cp-info-card__value {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-gold);
+/* ── 3 infos simples ── */
+.cp-info-row {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border);
+  margin: 0 -80px -40px -80px;
+}
+
+.cp-info-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 80px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cp-info-item:last-child { border-bottom: none; }
+
+.cp-info-item__icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+
+.cp-info-item__text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text);
   letter-spacing: 0.04em;
-  margin-top: 4px;
 }
-
-.cp-info-card__link { text-decoration: none; transition: color 0.2s; }
-.cp-info-card__link:hover { color: var(--color-gold-light); }
 
 /* ── DROITE ── */
 .cp-right {
@@ -472,11 +465,11 @@ function submitForm() {
 }
 
 .cp-form-sub {
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
-  margin-bottom: 32px;
+  margin-bottom: 22px;
 }
 
 /* ── Form ── */
@@ -523,7 +516,7 @@ function submitForm() {
   -webkit-appearance: none;
 }
 
-.cp-form__input::placeholder { color: rgba(136, 136, 136, 0.35); }
+.cp-form__input::placeholder { color: rgba(136, 136, 136, 1); }
 .cp-form__input-wrap--select { position: relative; }
 .cp-form__select { cursor: pointer; padding-right: 28px; color: var(--color-text); }
 .cp-form__select option { background: var(--color-bg-2); color: var(--color-text); }
@@ -549,7 +542,7 @@ function submitForm() {
   transition: border-color 0.2s;
 }
 
-.cp-form__textarea::placeholder { color: rgba(136, 136, 136, 0.35); }
+.cp-form__textarea::placeholder { color: rgba(136, 136, 136, 1); }
 .cp-form__textarea:focus { border-color: rgba(201, 162, 96, 0.5); }
 
 .cp-form__error { font-size: 11px; color: rgba(220, 80, 80, 0.8); }
@@ -583,7 +576,7 @@ function submitForm() {
 .cp-form__submit--sent { background: rgba(76, 175, 80, 0.8); pointer-events: none; }
 
 .cp-form__mention {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 300;
   color: var(--color-muted);
 }
@@ -592,7 +585,8 @@ function submitForm() {
 @media (max-width: 1200px) {
   .cp-left  { padding: 32px 40px 32px 48px; }
   .cp-right { padding: 32px 48px 32px 40px; }
-  .cp-info-row { margin: auto -40px -32px -48px; }
+  .cp-info-row { margin: 0 -40px -32px -48px; }
+  .cp-info-item { padding: 16px 48px; }
 }
 
 @media (max-width: 1024px) {
@@ -602,20 +596,17 @@ function submitForm() {
   .cp-left { border-right: none; border-bottom: 1px solid var(--color-border); padding: 40px; overflow: visible; }
   .cp-left::before { display: none; }
   .cp-right { padding: 40px; overflow: visible; }
-  .cp-info-row { margin: auto -40px -40px -40px; }
+  .cp-info-row { margin: 0 -40px -40px -40px; }
+  .cp-info-item { padding: 16px 40px; }
 }
 
 @media (max-width: 768px) {
   .cp-nav { padding: 0 20px; }
   .cp-left  { padding: 28px 20px; }
   .cp-right { padding: 28px 20px; }
-  .cp-info-row { grid-template-columns: repeat(3, 1fr); margin: auto -20px -28px -20px; }
-  .cp-info-card { padding: 20px 12px; gap: 6px; }
-  .cp-info-card__icon { width: 36px; height: 36px; margin-bottom: 6px; }
-  .cp-info-card__title { font-size: 11px; }
-  .cp-info-card__sub { font-size: 10px; }
-  .cp-info-card__value { font-size: 11px; }
+  .cp-info-row { margin: 0 -20px -28px -20px; }
+  .cp-info-item { padding: 14px 20px; }
+  .cp-phone-block__number { font-size: 36px; }
   .cp-form__row { grid-template-columns: 1fr; }
-  .cp-actions { flex-direction: column; align-items: flex-start; }
 }
 </style>

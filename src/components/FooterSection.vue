@@ -17,8 +17,8 @@
             <li><router-link to="/">Accueil</router-link></li>
             <li><router-link to="/solutions/surveillance-humaine">Surveillance humaine</router-link></li>
             <li><router-link to="/solutions/surveillance-materielle">Surveillance matérielle</router-link></li>
-            <li><router-link to="/secteurs/chantiers">Chantiers BTP</router-link></li>
-            <li><router-link to="/secteurs/biens-vacants">Biens vacants</router-link></li>
+            <li><router-link to="/secteurs">Chantiers BTP</router-link></li>
+            <li><router-link to="/secteurs">Biens vacants</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
           </ul>
         </div>

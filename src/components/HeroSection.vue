@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import heroBg from '../assets/photos/hero.jpeg'
+import heroBg from '../assets/photos/hero1.png'
 </script>
 
 <style scoped>
@@ -56,7 +56,6 @@ import heroBg from '../assets/photos/hero.jpeg'
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(8, 8, 8, 0.85);
 }
 
 .hero__content {

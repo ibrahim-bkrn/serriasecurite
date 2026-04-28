@@ -303,7 +303,7 @@ onMounted(() => {
 .sp-hero__img {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80');
+  background-image: url('../assets/photos/image.png');
   background-size: cover;
   background-position: center 30%;
   z-index: 0;
@@ -491,8 +491,8 @@ onMounted(() => {
 
 .faq-item__q {
   font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 500;
   color: var(--color-white);
   line-height: 1.4;
 }
@@ -504,8 +504,8 @@ onMounted(() => {
 }
 
 .faq-item__icon-wrap {
-  width: 36px;
-  height: 36px;
+  width: 45px;
+  height: 45px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -536,7 +536,7 @@ onMounted(() => {
 .faq-item__body { overflow: hidden; }
 
 .faq-item__a {
-  font-size: 14px;
+  font-size: 19px;
   color: var(--color-muted);
   line-height: 1.7;
   font-weight: 300;

@@ -93,7 +93,7 @@ onMounted(() => {
 
 .page-cta__label {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -114,7 +114,7 @@ onMounted(() => {
 
 .page-cta__sub {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.6;

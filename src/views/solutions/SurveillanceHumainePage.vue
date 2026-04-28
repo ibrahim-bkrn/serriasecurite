@@ -408,7 +408,7 @@ onMounted(() => {
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 500;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: 16px;
@@ -738,7 +738,7 @@ onMounted(() => {
 
 /* ── PHOTO ZONE ── */
 .sh-agent-card__photo {
-  height: 50vh;
+  height: 400px;
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
@@ -1004,6 +1004,12 @@ onMounted(() => {
   max-width: 680px;
 }
 
+@media (max-width: 900px) {
+  .sh-step__text {
+    font-size: 16px;
+  }
+}
+
 /* ── CROSS-SELL ── */
 .sh-crossell {
   border-top: 1px solid var(--color-border);
@@ -1125,6 +1131,13 @@ onMounted(() => {
   line-height: 1.7;
   margin-bottom: 32px;
 }
+
+@media (max-width:900px) {
+    .cs-v3__text{
+      font-size:15px;
+    }
+}
+
 .cs-v3__cta {
   display: inline-flex;
   align-items: center;
@@ -1201,7 +1214,8 @@ onMounted(() => {
 .sh-engagements__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 0.5px;
+  padding: 0.5px;
   margin-top: 60px;
   background: var(--color-border);
 }
@@ -1215,7 +1229,10 @@ onMounted(() => {
   transition: background 0.3s;
 }
 
-.sh-engagement:hover { background: rgba(201, 162, 96, 0.05); }
+@media (max-width: 900px) {
+  .sh-engagement{align-items: flex-start;}
+}
+
 
 .sh-engagement__icon {
   color: var(--color-gold);

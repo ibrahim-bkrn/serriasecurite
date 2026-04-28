@@ -127,12 +127,12 @@ onMounted(() => {
   width: 48px;
   height: 2px;
   background: var(--color-gold);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .engagements__desc {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
@@ -176,7 +176,7 @@ onMounted(() => {
 
 .engagement-item__top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 20px;
   margin-bottom: 10px;
 }
@@ -192,7 +192,7 @@ onMounted(() => {
 
 .engagement-item__title {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 500;
   color: var(--color-white);
   letter-spacing: 0.01em;
@@ -200,7 +200,7 @@ onMounted(() => {
 
 .engagement-item__text {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;

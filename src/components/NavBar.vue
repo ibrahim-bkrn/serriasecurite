@@ -23,43 +23,19 @@
           </button>
           <Transition name="nav-dropdown">
             <div v-show="solutionsOpen" class="navbar__dropdown">
-              <div class="navbar__dropdown-inner">
-                <router-link to="/solutions/surveillance-humaine" class="navbar__dropdown-item" @click="closeAll">
-                  <div class="navbar__dropdown-item-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                    </svg>
-                  </div>
-                  <div class="navbar__dropdown-item-text">
-                    <span class="navbar__dropdown-item-title">Surveillance humaine</span>
-                    <span class="navbar__dropdown-item-sub">Agents CNAPS · Gardiennage · Rondes</span>
-                  </div>
-                </router-link>
-                <router-link to="/solutions/surveillance-materielle" class="navbar__dropdown-item" @click="closeAll">
-                  <div class="navbar__dropdown-item-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                  </div>
-                  <div class="navbar__dropdown-item-text">
-                    <span class="navbar__dropdown-item-title">Surveillance matérielle</span>
-                    <span class="navbar__dropdown-item-sub">Alarme AJAX · Vidéosurveillance</span>
-                  </div>
-                </router-link>
-                <div class="navbar__dropdown-item navbar__dropdown-item--soon">
-                  <div class="navbar__dropdown-item-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                  </div>
-                  <div class="navbar__dropdown-item-text">
-                    <span class="navbar__dropdown-item-title">
-                      Protection physique
-                      <span class="navbar__dropdown-soon-badge">Bientôt</span>
-                    </span>
-                    <span class="navbar__dropdown-item-sub">Portes anti-squat · Sécurisation</span>
-                  </div>
-                </div>
+              <div class="navbar__dropdown-group">
+                <router-link to="/solutions/surveillance-humaine" class="navbar__dropdown-main" @click="closeAll">Surveillance humaine</router-link>
+              </div>
+
+              <div class="navbar__dropdown-group">
+                <router-link to="/solutions/surveillance-materielle" class="navbar__dropdown-main" @click="closeAll">Surveillance matérielle</router-link>
+                <router-link to="/solutions/videosurveillance" class="navbar__dropdown-sub" @click="closeAll">Vidéosurveillance</router-link>
+                <router-link to="/solutions/alarme-anti-intrusion" class="navbar__dropdown-sub" @click="closeAll">Alarme anti-intrusion</router-link>
+                <router-link to="/solutions/alarme-sites-inocupes" class="navbar__dropdown-sub" @click="closeAll">Alarme sites inoccupés</router-link>
+              </div>
+
+              <div class="navbar__dropdown-group">
+                <router-link to="/solutions/protection-physique" class="navbar__dropdown-main" @click="closeAll">Protection physique</router-link>
               </div>
             </div>
           </Transition>
@@ -118,15 +94,12 @@
             </svg>
           </button>
           <div class="mobile-overlay__sub" :class="{ 'mobile-overlay__sub--open': solutionsOpen }">
-            <router-link to="/solutions/surveillance-humaine" class="mobile-overlay__sub-link" @click="closeAll">
-              Surveillance humaine
-            </router-link>
-            <router-link to="/solutions/surveillance-materielle" class="mobile-overlay__sub-link" @click="closeAll">
-              Surveillance matérielle
-            </router-link>
-            <span class="mobile-overlay__sub-link mobile-overlay__sub-link--soon">
-              Protection physique <span class="mobile-overlay__soon-badge">Bientôt</span>
-            </span>
+            <router-link to="/solutions/surveillance-humaine" class="mobile-overlay__sub-link" @click="closeAll">Surveillance humaine</router-link>
+            <router-link to="/solutions/surveillance-materielle" class="mobile-overlay__sub-link" @click="closeAll">Surveillance matérielle</router-link>
+            <router-link to="/solutions/alarme-anti-intrusion" class="mobile-overlay__sub-link mobile-overlay__sub-link--child" @click="closeAll">↳ Alarme anti-intrusion</router-link>
+            <router-link to="/solutions/videosurveillance" class="mobile-overlay__sub-link mobile-overlay__sub-link--child" @click="closeAll">↳ Vidéosurveillance</router-link>
+            <router-link to="/solutions/alarme-sites-inocupes" class="mobile-overlay__sub-link mobile-overlay__sub-link--child" @click="closeAll">↳ Sites inoccupés</router-link>
+            <router-link to="/solutions/protection-physique" class="mobile-overlay__sub-link" @click="closeAll">Protection physique</router-link>
           </div>
         </div>
 
@@ -166,7 +139,6 @@ import logo from '../assets/logo/logo-horizontal.png'
 const isScrolled    = ref(false)
 const menuOpen      = ref(false)
 const solutionsOpen = ref(false)
-const secteursOpen  = ref(false)
 
 let savedScroll = 0
 
@@ -191,20 +163,17 @@ function onScroll() {
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
   solutionsOpen.value = false
-  secteursOpen.value  = false
   if (menuOpen.value) lockScroll()
   else unlockScroll(true)
 }
 
 function toggleSolutions() {
   solutionsOpen.value = !solutionsOpen.value
-  secteursOpen.value  = false
 }
 
 function closeAll() {
   menuOpen.value      = false
   solutionsOpen.value = false
-  secteursOpen.value  = false
   unlockScroll(false)
 }
 
@@ -212,7 +181,6 @@ function onClickOutside(e) {
   if (menuOpen.value) return
   if (!e.target.closest('.navbar__item--dropdown')) {
     solutionsOpen.value = false
-    secteursOpen.value  = false
   }
 }
 
@@ -328,149 +296,87 @@ onUnmounted(() => {
   color: var(--color-gold);
 }
 
-/* ── DROPDOWN PANEL ── */
+/* ── DROPDOWN ── */
 .navbar__item--dropdown {
   position: relative;
 }
 
 .navbar__dropdown {
   position: absolute;
-  top: calc(100% + 16px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-bg-2);
+  top: calc(100% + 12px);
+  left: 25%;
+  transform: translateX(-25%);
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
-  min-width: 360px;
+  padding: 28px 32px;
+  min-width: 380px;
   z-index: 100;
-  transform-origin: top center;
-}
-
-.navbar__dropdown::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 8px;
-  height: 8px;
-  background: var(--color-bg-2);
-  border-left: 1px solid var(--color-border);
-  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /* ── Vue Transition: nav-dropdown ── */
 .nav-dropdown-enter-active {
-  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 .nav-dropdown-leave-active {
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition: opacity 0.12s ease, transform 0.12s ease;
 }
 .nav-dropdown-enter-from,
 .nav-dropdown-leave-to {
   opacity: 0;
-  transform: translateX(-50%) scaleY(0.94) translateY(-6px);
+  transform: translateX(-25%) translateY(-4px);
 }
 .nav-dropdown-enter-to,
 .nav-dropdown-leave-from {
   opacity: 1;
-  transform: translateX(-50%) scaleY(1) translateY(0);
+  transform: translateX(-25%) translateY(0);
 }
 
-.navbar__dropdown-inner {
-  padding: 16px;
+.navbar__dropdown-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
 }
 
-.navbar__dropdown-label {
-  font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(201, 162, 96, 0.5);
-  padding: 0 4px 10px;
-  margin: 0;
-  border-bottom: 1px solid var(--color-border);
-  margin-bottom: 6px;
-}
-
-.navbar__dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 10px 10px;
-  text-decoration: none;
-  border-left: 2px solid transparent;
-  transition: border-color 0.2s, background 0.2s;
-  cursor: pointer;
-}
-
-a.navbar__dropdown-item:hover {
-  background: rgba(201, 162, 96, 0.05);
-  border-left-color: var(--color-gold);
-}
-
-.navbar__dropdown-item-icon {
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(201, 162, 96, 0.07);
-  border: 1px solid rgba(201, 162, 96, 0.15);
-  color: var(--color-gold);
-  flex-shrink: 0;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-a.navbar__dropdown-item:hover .navbar__dropdown-item-icon {
-  background: rgba(201, 162, 96, 0.14);
-  border-color: rgba(201, 162, 96, 0.35);
-}
-
-.navbar__dropdown-item-text {
-  flex: 1;
-  min-width: 0;
-}
-
-.navbar__dropdown-item-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-white);
-  margin-bottom: 3px;
-}
-
-.navbar__dropdown-item-sub {
-  display: block;
+.navbar__dropdown-cat {
   font-family: var(--font-body);
   font-size: 10px;
-  font-weight: 300;
-  color: var(--color-muted);
-  letter-spacing: 0.04em;
-}
-
-
-.navbar__dropdown-item--soon {
-  cursor: default;
-  opacity: 0.45;
-}
-
-.navbar__dropdown-soon-badge {
-  font-family: var(--font-body);
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  margin: 0;
+}
+
+.navbar__dropdown-main {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color 0.15s;
+  display: block;
+}
+
+.navbar__dropdown-main:hover {
   color: var(--color-gold);
-  border: 1px solid rgba(201, 162, 96, 0.4);
-  padding: 1px 6px;
-  line-height: 1.6;
+}
+
+.navbar__dropdown-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.15s;
+  display: block;
+  padding-left: 12px;
+}
+
+.navbar__dropdown-sub:hover {
+  color: var(--color-white);
 }
 
 /* ── CTA BUTTON ── */
@@ -657,7 +563,13 @@ a.navbar__dropdown-item:hover .navbar__dropdown-item-icon {
 }
 
 .mobile-overlay__sub--open {
-  max-height: 200px;
+  max-height: 400px;
+}
+
+.mobile-overlay__sub-link--child {
+  padding-left: 20px;
+  font-size: 12px;
+  opacity: 0.65;
 }
 
 .mobile-overlay__sub-link {

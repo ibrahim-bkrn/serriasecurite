@@ -68,9 +68,9 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 import gardiennageImg  from '../assets/photos/gardiennage3.jpeg'
 import porteImg        from '../assets/photos/porte-antisquat2.jpeg'
-import surveillanceImg from '../assets/photos/surveillance2.jpeg'
-import identiteImg     from '../assets/photos/identite.jpeg'
-import gardiennage2Img from '../assets/photos/gardiennage2.jpeg'
+import surveillanceImg from '../assets/photos/echafaudage.png'
+import identiteImg     from '../assets/photos/maison.png'
+import gardiennage2Img from '../assets/photos/commerceProximite.png'
 
 const sectionRef    = ref(null)
 const viewportRef   = ref(null)

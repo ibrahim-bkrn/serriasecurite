@@ -103,7 +103,7 @@
             <li v-for="p in particuliers" :key="p">{{ p }}</li>
           </ul>
           <router-link to="/contact" class="vs-pourqui__cta">
-            Demander un devis gratuit
+            Surveiller mon domicile
             <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </router-link>
         </div>
@@ -116,7 +116,7 @@
             <li v-for="p in professionnels" :key="p">{{ p }}</li>
           </ul>
           <router-link to="/contact" class="vs-pourqui__cta">
-            Demander un devis gratuit
+            Sécuriser mes locaux
             <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </router-link>
         </div>
@@ -161,18 +161,18 @@ import videoSrc     from '../../assets/video/camera_relay_siren_cef65a216e.webm'
 import camImg      from '../../assets/photos/turret-cam-2.png'
 
 
-import real1  from '../../assets/photos/real-1.jpeg'
-import real2  from '../../assets/photos/real-2.jpeg'
-import real3  from '../../assets/photos/real-3.jpeg'
-import real4  from '../../assets/photos/real-4.jpeg'
-import real5  from '../../assets/photos/real-5.jpeg'
-import real6  from '../../assets/photos/real-6.jpeg'
-import real7  from '../../assets/photos/real-7.jpeg'
-import real8  from '../../assets/photos/real-8.jpeg'
-import real9  from '../../assets/photos/real-9.jpeg'
-import real10 from '../../assets/photos/real-10.jpeg'
-import real11 from '../../assets/photos/real-11.jpeg'
-import real12 from '../../assets/photos/real-12.jpeg'
+import real1  from '../../assets/photos/real-14.jpeg'
+import real2  from '../../assets/photos/real-15.jpeg'
+import real3  from '../../assets/photos/real-14.jpeg'
+import real4  from '../../assets/photos/real-15.jpeg'
+import real5  from '../../assets/photos/real-14.jpeg'
+import real6  from '../../assets/photos/real-15.jpeg'
+import real7  from '../../assets/photos/real-14.jpeg'
+import real8  from '../../assets/photos/real-15.jpeg'
+import real9  from '../../assets/photos/real-14.jpeg'
+import real10 from '../../assets/photos/real-15.jpeg'
+import real11 from '../../assets/photos/real-14.jpeg'
+import real12 from '../../assets/photos/real-15.jpeg'
 
 const allReal = [real1, real2, real3, real4, real5, real6, real7, real8, real9, real10, real11, real12]
 const col1 = allReal.slice(0, 4)
@@ -275,7 +275,7 @@ const steps = [
 
 /* ── HERO ── */
 .vs-hero {
-  min-height: 550px;
+  min-height: 70vh;
   display: grid;
   grid-template-columns: 1fr 1.8fr 1fr;
   align-items: center;
@@ -412,6 +412,12 @@ const steps = [
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.6;
+}
+
+@media (max-width:900px){
+  .vs-real__sub {
+    font-size: 16px;
+  }
 }
 
 .vs-real__columns {
@@ -685,7 +691,7 @@ const steps = [
 
 .vs-step__text {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 19px;
   font-weight: 300;
   color: var(--color-muted);
   line-height: 1.7;
@@ -694,6 +700,10 @@ const steps = [
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .vs-ia__features { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .vs-ia__features { grid-template-columns: 1fr; }
   .vs-real { padding: 80px 40px; }
   .vs-pourqui__col { padding: 80px 40px; }
   .vs-method__container { padding: 0 40px; }
